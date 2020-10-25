@@ -1,0 +1,9 @@
+[user]
+	name = Anatoly Korobov
+	email = a.korobov06@gmail.com
+
+[alias]
+	l   = log --oneline --graph --decorate
+	st  = status
+	br  = branch
+	c   = checkout
