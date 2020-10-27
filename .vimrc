@@ -1,21 +1,16 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+" -- Clipboard
+" set clipboard=unnamed
 
 " -- Display
 set title			" Update the title of your window or your terminal
 set number relativenumber	" Display hybrid line numbers
 set wrap			" Wrap lines when they are too long
 
-" -- Keys
-map <C-n> :NERDTreeToggle<CR>
-
-
 " Enable syntax highlighting
 syntax enable
-
-set guioptions=T	" Enable the toolbar
-set guifont=Monaco:13
 
 " -- Beep
 set novisualbell
@@ -25,11 +20,17 @@ set noerrorbells
 set ignorecase
 set smartcase
 
+" spaces instead of tabs
+set expandtab
+set smarttab
+set tabstop     =4
+set shiftwidth  =4
+set smartindent
+set autoindent
 
 " ==================================================
 " --------------------Vundle------------------------
 " ==================================================
-
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -58,7 +59,7 @@ filetype plugin indent on    " required
 " ==================================================
 " --------------------Airline------------------------
 " ==================================================
-let g:airline_theme = 'bubblegum'
+let g:airline_theme = 'dark'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#branch#enabled = 1 
 let g:airline_left_sep = ' ❤  '
@@ -67,9 +68,16 @@ let g:airline_section_x = ''
 let g:airline_section_y = '' 
 let g:airline_section_z = '' 
 
+" ==================================================
+" --------------------NerdTree------------------------
+" ==================================================
+" -- Keys
+map <C-n> :NERDTreeToggle<CR>
 " switch to left / right split (mostly for Nerd Tree)
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+
+let NERDTreeShowHidden=1
 
 " switch tab
 map <C-k> :tabn<CR>
