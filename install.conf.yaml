@@ -1,3 +1,10 @@
+- default:
+    link:
+        relink: true
 - clean: []
-- link: {}
+- link:
+    ~/.vimrc: .vimrc
+    ~/.tmux.conf: .tmux.conf
+    ~/.gitconfig: .gitconfig
+    ~/.gitignore: .gitignore
 - shell: []
