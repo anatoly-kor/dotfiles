@@ -33,6 +33,8 @@ Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
 Plug 'fisadev/vim-isort'
 Plug 'vim-test/vim-test'
+Plug 'fcpg/vim-osc52'
+
 
 call plug#end()
 " PlugInstall [name]
@@ -199,3 +201,8 @@ nmap <silent> t<C-g> :TestVisit<CR>
 nnoremap <Leader>gh :diffget //3<CR>
 nnoremap <Leader>gl :diffget //2<CR>
 nnoremap <Leader>gs :G <CR>
+
+" Yank
+set mouse=a
+vmap <C-c> y:Oscyank<CR>
+xmap <F7> y:Oscyank<CR>
