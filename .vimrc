@@ -10,6 +10,7 @@ call plug#begin('~/.vim/plugged')
 
 
 Plug 'tpope/vim-fugitive' "TODO: LEARN
+Plug 'tpope/vim-surround'
 Plug 'preservim/nerdtree' 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -33,8 +34,11 @@ Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
 Plug 'fisadev/vim-isort'
 Plug 'vim-test/vim-test'
+Plug 'christoomey/vim-system-copy'
 Plug 'fcpg/vim-osc52'
-
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'preservim/tagbar'
 
 call plug#end()
 " PlugInstall [name]
@@ -75,6 +79,10 @@ let NERDTreeShowHidden=1
 
 " nnoremap <Leader><space> <CR>
 let mapleader=" "
+
+" Source Vim configuration file and install plugins
+nnoremap <silent><leader>1 :source ~/.vimrc<CR>
+nnoremap <silent><leader>2 :source ~/.vimrc \| :PlugInstall<CR>
 
 colorscheme dracula
 " Enable syntax highlighting
@@ -120,6 +128,9 @@ let g:SimpylFold_docstring_preview=1
 
 set colorcolumn=0
 
+" Tagbar
+nnoremap <leader>tb :TagbarToggle<CR>
+
 " ==================================================
 " --------------------Python------------------------
 " ==================================================
@@ -137,6 +148,7 @@ au BufNewFile,BufRead *.py
 
 " ALE
 let g:ale_linters = {'python': ['flake8', 'pylint']}
+" :ALEFix
 
 " coc
 
@@ -175,12 +187,12 @@ function! s:show_documentation()
 endfunction
 
 " Debugger remaps
-nnoremap <Leader>m :MaximizerToggle!<CR>
+nnoremap <leader>m :MaximizerToggle!<CR>
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references) coc
 
 " isort
@@ -188,12 +200,18 @@ nnoremap <Leader>is :Isort<CR>
 let g:vim_isort_python_version = 'python3'
 
 " Tests
-" these "Ctrl mappings" work well when Caps Lock is mapped to Ctrl
 nmap <silent> t<C-n> :TestNearest<CR>
 nmap <silent> t<C-f> :TestFile<CR>
 nmap <silent> t<C-s> :TestSuite<CR>
 nmap <silent> t<C-l> :TestLast<CR>
 nmap <silent> t<C-g> :TestVisit<CR>
+
+" Debug
+nmap <leader>dd :call vimspector#Launch()<CR>
+nmap <leader>dx :VimspectorReset<CR>
+nmap <leader>de :VimspectorEval
+nmap <leader>dw :VimspectorWatch
+nmap <leader>do :VimspectorShowOutput
 
 " ==================================================
 " --------------------GIT---------------------------
@@ -202,7 +220,20 @@ nnoremap <Leader>gh :diffget //3<CR>
 nnoremap <Leader>gl :diffget //2<CR>
 nnoremap <Leader>gs :G <CR>
 
-" Yank
 set mouse=a
+
 vmap <C-c> y:Oscyank<CR>
 xmap <F7> y:Oscyank<CR>
+
+
+
+" ==================================================
+" --------------------FZF---------------------------
+" ==================================================
+" :Files
+" :Files!
+" :GFiles open only git files 
+" :Commits
+
+nnoremap <C-g> :Ag<Cr>
+nnoremap <silent><leader>l :Buffers<CR>
