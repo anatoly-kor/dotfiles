@@ -38,7 +38,9 @@ Plug 'christoomey/vim-system-copy'
 Plug 'fcpg/vim-osc52'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'stsewd/fzf-checkout.vim'
 Plug 'preservim/tagbar'
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 " PlugInstall [name]
@@ -213,12 +215,16 @@ nmap <leader>de :VimspectorEval
 nmap <leader>dw :VimspectorWatch
 nmap <leader>do :VimspectorShowOutput
 
+" Run script
+autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+
 " ==================================================
 " --------------------GIT---------------------------
 " ==================================================
-nnoremap <Leader>gh :diffget //3<CR>
-nnoremap <Leader>gl :diffget //2<CR>
-nnoremap <Leader>gs :G <CR>
+nnoremap <leader>gh :diffget //3<CR>
+nnoremap <leader>gl :diffget //2<CR>
+nnoremap <leader>gs :G <CR>
+" dv for resolve merge conflict
 
 set mouse=a
 
@@ -230,6 +236,7 @@ xmap <F7> y:Oscyank<CR>
 " ==================================================
 " --------------------FZF---------------------------
 " ==================================================
+" let g:fzf_command_prefix = 'Fzf'
 " :Files
 " :Files!
 " :GFiles open only git files 
@@ -237,3 +244,11 @@ xmap <F7> y:Oscyank<CR>
 
 nnoremap <C-g> :Ag<Cr>
 nnoremap <silent><leader>l :Buffers<CR>
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
+let $FZF_DEFAULT_OPTS='--reverse'
+nnoremap <leader>gc :GCheckout<CR>
+
+
+" ==================================================
+" --------------------tmux--------------------------
+" ==================================================
