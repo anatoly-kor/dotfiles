@@ -23,7 +23,6 @@ Plug 'tmhedberg/SimpylFold' "TODO: LEARN
 " Plug 'vim-scripts/indentpython.vim' "TODO: LEARN
 Plug 'vim-syntastic/syntastic' "TODO: LEARN
 Plug 'nvie/vim-flake8' "TODO: LEARN
-Plug 'kien/ctrlp.vim' "TODO: LEARN
 Plug 'tpope/vim-commentary'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'dense-analysis/ale'
@@ -242,6 +241,7 @@ xmap <F7> y:Oscyank<CR>
 " :GFiles open only git files 
 " :Commits
 
+nnoremap <C-p> :GFiles<Cr>
 nnoremap <C-g> :Ag<Cr>
 nnoremap <silent><leader>l :Buffers<CR>
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
