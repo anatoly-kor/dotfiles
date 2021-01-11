@@ -40,6 +40,10 @@ Plug 'junegunn/fzf.vim'
 Plug 'stsewd/fzf-checkout.vim'
 Plug 'preservim/tagbar'
 Plug 'airblade/vim-gitgutter'
+Plug 'yggdroot/indentline'
+Plug 'jgdavey/tslime.vim'
+Plug 'pineapplegiant/spaceduck'
+Plug 'junegunn/goyo.vim'
 
 call plug#end()
 " PlugInstall [name]
@@ -51,10 +55,11 @@ call plug#end()
 " ==================================================
 " --------------------Airline-----------------------
 " ==================================================
-let g:airline_theme = 'dracula'
+" let g:airline_theme = 'dracula'
+let g:airline_theme = 'spaceduck'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#branch#enabled = 1
-let g:airline_left_sep = ' ❤  '
+let g:airline_left_sep = '  ❤  '
 let g:airline_right_sep = ''
 let g:airline_section_warning = ''
 let g:airline_section_x = ''
@@ -78,14 +83,22 @@ let NERDTreeShowHidden=1
 " --------------------VIM---------------------------
 " ==================================================
 
-" nnoremap <Leader><space> <CR>
+let $LANG='en' 
+set langmenu=en
 let mapleader=" "
 
 " Source Vim configuration file and install plugins
 nnoremap <silent><leader>1 :source ~/.vimrc<CR>
 nnoremap <silent><leader>2 :source ~/.vimrc \| :PlugInstall<CR>
+if exists('+termguicolors')
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    set termguicolors
+endif
 
-colorscheme dracula
+
+colorscheme spaceduck
+" colorscheme dracula
 " Enable syntax highlighting
 syntax enable
 
@@ -106,6 +119,7 @@ set noerrorbells
 set ignorecase
 set smartcase
 set hlsearch
+map <leader>h :noh<CR>
 
 " spaces instead of tabs
 set expandtab
@@ -121,6 +135,9 @@ set splitright
 " move between buffers
 map <C-h> <Esc>:bprev<CR>
 map <C-l> <Esc>:bnext<CR>
+" close buffer
+map <leader>bd :bd<CR>
+map <leader>ba :1,1000 bd!<CR>
 
 " Foldings
 set foldmethod=indent
@@ -131,6 +148,12 @@ set colorcolumn=0
 
 " Tagbar
 nnoremap <leader>tb :TagbarToggle<CR>
+
+" Indent
+let g:indentLine_setColors = 0
+" let g:indentLine_defaultGroup = 'SpecialKey'
+" let g:indentLine_color_term = 9
+" let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
 " ==================================================
 " --------------------Python------------------------
@@ -190,10 +213,18 @@ endfunction
 " Debugger remaps
 nnoremap <leader>m :MaximizerToggle!<CR>
 
+" :res 30
+" 5 <Ctrl-w> > – Makes left split 5 columns wider
+" 10 <Ctrl-w> < – Makes left split 10 columns narrower
+" <Ctrl-w> J – Switch orientation of splits
+" 5 <Ctrl-w> - - Make bottom split 5 rows shorter
+" 10 <Ctrl-w> + - Make bottom split 10 rows taller
+" <Ctrl-w> = - Equalize splits again
+
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
-" nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references) coc
 
 " isort
@@ -201,6 +232,8 @@ nnoremap <Leader>is :Isort<CR>
 let g:vim_isort_python_version = 'python3'
 
 " Tests
+" make test commands execute using dispatch.vim
+let test#strategy = "tslime"
 nmap <silent> t<C-n> :TestNearest<CR>
 nmap <silent> t<C-f> :TestFile<CR>
 nmap <silent> t<C-s> :TestSuite<CR>
@@ -214,17 +247,29 @@ nmap <leader>de :VimspectorEval
 nmap <leader>dw :VimspectorWatch
 nmap <leader>do :VimspectorShowOutput
 
+nmap <leader>dl <Plug>VimspectorStepInto
+nmap <leader>dj <Plug>VimspectorStepOver
+nmap <leader>dk <Plug>VimspectorStepOut
+nmap <leader>d_ <Plug>VimspectorRestart
+nnoremap <leader>d<space> :call vimspector#Continue()<CR>
+
+nmap <leader>drc <Plug>VimspectorRunToCursor
+nmap <leader>dbp <Plug>VimspectorToggleBreakpoint
+nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
+
 " Run script
 autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 
 " ==================================================
 " --------------------GIT---------------------------
 " ==================================================
-nnoremap <leader>gh :diffget //3<CR>
-nnoremap <leader>gl :diffget //2<CR>
+nnoremap <leader>gh :diffget //2<CR>
+nnoremap <leader>gl :diffget //3<CR>
 nnoremap <leader>gs :G <CR>
 " dv for resolve merge conflict
 
+" Shift+D to show diff from status page
+set diffopt+=vertical
 set mouse=a
 
 vmap <C-c> y:Oscyank<CR>
@@ -246,9 +291,33 @@ nnoremap <C-g> :Ag<Cr>
 nnoremap <silent><leader>l :Buffers<CR>
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 let $FZF_DEFAULT_OPTS='--reverse'
-nnoremap <leader>gc :GCheckout<CR>
+" nnoremap <leader>gc :GCheckout<CR>
+nnoremap <leader>gb :GBranches<CR>
+
+" ==================================================
+" --------------------system------------------------
+" ==================================================
+set mouse=a
+
+vmap <C-c> y:Oscyank<CR>
+xmap <F7> y:Oscyank<CR>
+
+" ]m - jump to the beginning of the next method
+" ]M - jump to the end of the next method
+" [m - jump to the beginning of the previous method
+" [M - jump to the end of the previous method]]
+
+" ==================================================
+" --------------------tslime------------------------
+" ==================================================
+let g:tslime_always_current_session = 1
+let g:tslime_always_current_window = 1
 
 
 " ==================================================
-" --------------------tmux--------------------------
+" --------------------GOYO--------------------------
 " ==================================================
+let g:goyo_width=100
+let g:goyo_margin_top = 2
+let g:goyo_margin_bottom = 2
+nnoremap <silent> <leader>z :Goyo<cr>
