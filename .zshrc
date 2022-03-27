@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH="/usr/local/bin:$PATH"
 # export PATH="$HOME/anaconda3/bin:$PATH"  # commented out by conda initialize
-# export PATH="/usr/local/opt/python@3.10/bin:$PATH"
+export PATH="/usr/local/opt/python@3.10/bin:$PATH"
 export PATH="/usr/local/opt/python@3.9/bin:$PATH"
 export PATH="/usr/local/opt/python@3.8/bin:$PATH"
 export PATH="/usr/local/opt/python@3.7/bin:$PATH"
@@ -109,6 +109,16 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias cat="bat"
 alias v="nvim"
+alias prw7="pipenv --python 3.7 install pytest flake8 -r requirements.txt --skip-lock && pipenv shell"
+alias prw9="pipenv --python 3.9 install pytest flake8 -r requirements.txt --skip-lock && pipenv shell"
+alias tn="tmux new-session -s $(basename $(pwd))"
 
 bindkey -s ^f "/Users/ak/tmux-sessionizer\n"
 bindkey -s ^t "/Users/ak/tmux-selector\n"
+
+# The next line updates PATH for Yandex Cloud CLI.
+if [ -f '/Users/ak/yandex-cloud/path.bash.inc' ]; then source '/Users/ak/yandex-cloud/path.bash.inc'; fi
+
+# The next line enables shell command completion for yc.
+if [ -f '/Users/ak/yandex-cloud/completion.zsh.inc' ]; then source '/Users/ak/yandex-cloud/completion.zsh.inc'; fi
+

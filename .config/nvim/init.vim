@@ -2,6 +2,12 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 set noswapfile
 set scrolloff=7
+set encoding=utf-8
+set fileformat=unix
+
+inoremap jk <esc>
+
+let mapleader=" "
 
 
 
@@ -13,64 +19,100 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'preservim/nerdtree' 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'flazz/vim-colorschemes'
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-colorscheme-switcher'
-Plug 'dracula/vim'
-Plug 'tmhedberg/SimpylFold'
-" Plug 'vim-scripts/indentpython.vim' "TODO: LEARN
+" Plug 'tmhedberg/SimpylFold'
 Plug 'vim-syntastic/syntastic'
 Plug 'nvie/vim-flake8'
 Plug 'tpope/vim-commentary'
 Plug 'Vimjas/vim-python-pep8-indent'
-" Plug 'dense-analysis/ale'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'} " :CocInstall coc-json coc-tsserver
 Plug 'jiangmiao/auto-pairs'
-" Plug 'sheerun/vim-polyglot'
+Plug 'sheerun/vim-polyglot'
 Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
 Plug 'vim-test/vim-test'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'stsewd/fzf-checkout.vim'
-" Plug 'majutsushi/tagbar'
-Plug 'airblade/vim-gitgutter'
+Plug 'majutsushi/tagbar'
 Plug 'yggdroot/indentline'
 Plug 'jgdavey/tslime.vim'
-Plug 'pineapplegiant/spaceduck'
+" Plug 'pineapplegiant/spaceduck'
 Plug 'junegunn/goyo.vim'
-" Plug 'will133/vim-dirdiff'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'L3MON4D3/LuaSnip'
+Plug 'fcpg/vim-osc52'
+" Plug 'yamatsum/nvim-cursorline'
+Plug 'jmcantrell/vim-virtualenv'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'ThePrimeagen/harpoon'
+" Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'thedenisnikulin/vim-cyberpunk'
 
 call plug#end()
-" PlugInstall [name]
-" PlugUpdate [name]
-" PlugClean!
-" PlugUpgrade
-" PlugStatus
+
+lua require('plugins')
 
 " ==================================================
-" --------------------Airline-----------------------
+" --------------------Packer------------------------
 " ==================================================
-" let g:airline_theme = 'dracula'
-let g:airline_theme = 'spaceduck'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#branch#enabled = 1
-let g:airline_left_sep = '  ❤  '
-let g:airline_right_sep = ''
-let g:airline_section_warning = ''
-let g:airline_section_x = ''
-let g:airline_section_y = ''
-let g:airline_section_z = ''
-set laststatus=2
+lua << EOF
+require('gitsigns').setup()
+
+require('hardline').setup{
+    bufferline = true,
+    theme = 'custom',   -- custom theme
+    custom_theme = {
+        text = {gui = "#000000", cterm = "NONE", cterm16 = "NONE"},
+        normal = {gui = "#F72119", cterm = "NONE", cterm16 = "NONE"},
+        insert = {gui = "#F72119", cterm = "NONE", cterm16 = "NONE"},
+        replace = {gui = "#F72119", cterm = "NONE", cterm16 = "NONE"},
+        inactive_comment = {gui = "#F72119", cterm = "NONE", cterm16 = "NONE"},
+        inactive_cursor = {gui = "NONE", cterm = "NONE", cterm16 = "NONE"},
+        inactive_menu = {gui = "#F72119", cterm = "NONE", cterm16 = "NONE"},
+        visual = {gui = "#F72119", cterm = "NONE", cterm16 = "NONE"},
+        command = {gui = "#F72119", cterm = "NONE", cterm16 = "NONE"},
+        alt_text = {gui = "NONE", cterm = "NONE", cterm16 = "NONE"},
+        warning = {gui = "#F72119", cterm = "NONE", cterm16 = "NONE"},
+    },
+    sections = {         -- define sections
+        {class = 'mode', item = require('hardline.parts.mode').get_item},
+        {class = 'high', item = require('hardline.parts.git').get_item, hide = 100},
+        {class = 'med', item = require('hardline.parts.filename').get_item},
+        '%<',
+        {class = 'med', item = '%='},
+        {class = 'low', item = require('hardline.parts.wordcount').get_item, hide = 100},
+        {class = 'error', item = require('hardline.parts.lsp').get_error},
+        {class = 'warning', item = require('hardline.parts.lsp').get_warning},
+        {class = 'high', item = require('hardline.parts.filetype').get_item, hide = 80},
+        {class = 'mode', item = require('hardline.parts.line').get_item},
+        }
+}
+EOF
+
+" ==================================================
+" --------------------IndentLine--------------------
+" ==================================================
+let g:indentLine_setColors = 1
+let g:indentLine_color_gui = '#F72119'
+let g:indentLine_bgcolor_gui = '#000000'
+
+" ==================================================
+" --------------------Harpoon-----------------------
+" ==================================================
+nnoremap <leader>a :lua require("harpoon.mark").add_file()<CR>
+nnoremap <C-e> :lua require("harpoon.ui").toggle_quick_menu()<CR>
+
+nnoremap <leader>h :lua require("harpoon.ui").nav_file(1)<CR>
+nnoremap <leader>j :lua require("harpoon.ui").nav_file(2)<CR>
+nnoremap <leader>k :lua require("harpoon.ui").nav_file(3)<CR>
+nnoremap <leader>l :lua require("harpoon.ui").nav_file(4)<CR>
+
 
 " ==================================================
 " --------------------NerdTree----------------------
@@ -88,14 +130,12 @@ let NERDTreeShowHidden=1
 " --------------------VIM---------------------------
 " ==================================================
 
-let $LANG='en' 
-set langmenu=en
-let mapleader=" "
+let $LC_MESSAGES = 'en_US'
 
 " Source Vim configuration file and install plugins
 if has('nvim')
-    nnoremap <silent><leader>1 :source ~/.config/nvim/init.vim<CR>
-    nnoremap <silent><leader>2 :source ~/.config/nvim/init.vim \| :PlugInstall<CR>
+    nnoremap <silent><leader>1 :source ~/.config/nvim/init.vim \| :PackerCompile<CR>
+    nnoremap <silent><leader>2 :source ~/.config/nvim/init.vim \| :PlugInstall \| :PackerUpdate<CR>
 else
     nnoremap <silent><leader>1 :source ~/.vimrc<CR>
     nnoremap <silent><leader>2 :source ~/.vimrc \| :PlugInstall<CR>
@@ -106,14 +146,15 @@ if exists('+termguicolors')
     set termguicolors
 endif
 
-
-colorscheme spaceduck
-" colorscheme dracula
+colorscheme cyberpunk
+let g:airline_theme='cyberpunk'
+set cursorline
+let g:cyberpunk_cursorline="default"
 " Enable syntax highlighting
 syntax enable
 
 " -- Clipboard
-set clipboard=unnamed
+set clipboard+=unnamedplus
 
 " -- Reselect pasted text
 nnoremap gp `[v`]
@@ -132,7 +173,7 @@ set noerrorbells
 set ignorecase
 set smartcase
 set hlsearch
-map <leader>h :noh<CR>
+map <leader>n :noh<CR>
 
 " spaces instead of tabs
 set expandtab
@@ -160,13 +201,10 @@ let g:SimpylFold_docstring_preview=1
 set colorcolumn=100
 
 " Tagbar
-" nnoremap <leader>tb :TagbarToggle<CR>
-
-" Indent
-let g:indentLine_setColors = 0
-" let g:indentLine_defaultGroup = 'SpecialKey'
-" let g:indentLine_color_term = 9
-" let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+nnoremap <leader>tb :TagbarToggle<CR>
+let g:tagbar_autoclose = 1
+let g:tagbar_autofocus = 1
+let g:tagbar_width = 60
 
 
 " Remaps
@@ -178,7 +216,6 @@ nnoremap J mzJ`z
 " ==================================================
 " --------------------Python------------------------
 " ==================================================
-set encoding=utf-8
 let python_highlight_all=1
 au BufNewFile,BufRead *.py
     \ set expandtab       |" replace tabs with spaces
@@ -193,9 +230,6 @@ au BufNewFile,BufRead *.py
 let g:flake8_show_in_gutter = 1
 let g:flake8_show_in_file = 1
 
-" ALE
-" let g:ale_linters = {'python': ['flake8', 'pylint', 'mypy']}
-" :ALEFix
 
 " Tests
 " make test commands execute using dispatch.vim
@@ -244,29 +278,18 @@ set mouse=a
 " ==================================================
 " --------------------FZF---------------------------
 " ==================================================
-" let g:fzf_command_prefix = 'Fzf'
-" :Files
-" :Files!
-" :GFiles open only git files 
-" :Commits
-
 nnoremap <C-p> :Files<Cr>
 nnoremap <C-g> :Ag<Cr>
-nnoremap <silent><leader>l :Buffers<CR>
-let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
+nnoremap <silent><leader>c :Commits<CR>
+nnoremap <silent><leader>gb :GBranches<CR>
+let g:fzf_preview_window = ['right:50%']
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
 let $FZF_DEFAULT_OPTS='--reverse'
-nnoremap <leader>gb :GBranches<CR>
 
 " ==================================================
 " --------------------system------------------------
 " ==================================================
 set mouse=a
-
-
-" ]m - jump to the beginning of the next method
-" ]M - jump to the end of the next method
-" [m - jump to the beginning of the previous method
-" [M - jump to the end of the previous method]]
 
 " ==================================================
 " --------------------tslime------------------------
@@ -297,9 +320,9 @@ local luasnip = require 'luasnip'
 -- nvim-cmp setup
 local cmp = require 'cmp'
 cmp.setup {
-  completion = {
-    autocomplete = false
-  },
+--  completion = {
+--    autocomplete = true
+--    },
   snippet = {
     expand = function(args)
       require('luasnip').lsp_expand(args.body)
@@ -311,7 +334,7 @@ cmp.setup {
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.close(),
+    -- ['<C-e>'] = cmp.mapping.close(),
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
@@ -392,3 +415,11 @@ for _, lsp in ipairs(servers) do
   }
 end
 EOF
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+
+
+" ==================================================
+" --------------------markdown----------------------
+" ==================================================
+let g:vim_markdown_conceal = 0
+let g:vim_markdown_conceal_code_blocks = 0
