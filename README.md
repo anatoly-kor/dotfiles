@@ -3,7 +3,7 @@
 
 ## Installation
 
-``shell
+```shell
 git clone https://github.com/anatoly-kor/dotfiles .dotfiles
 cd .dotfiles
 ./install
