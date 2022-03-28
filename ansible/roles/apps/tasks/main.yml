@@ -1,0 +1,10 @@
+---
+  - name: Tools
+    homebrew_cask:
+      state: present
+      name:
+        - notion
+        - brave-browser
+        - surfshark
+        - raycast
+        - zoomus

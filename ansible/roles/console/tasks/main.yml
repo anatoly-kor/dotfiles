@@ -1,0 +1,30 @@
+---
+  - name: iTerm2
+    homebrew_cask:
+      name: iterm2
+
+  - name: Required homebrew repositories
+    homebrew_tap:
+      name: homebrew/cask-fonts
+
+  - name: Console utils
+    homebrew:
+      name:
+        - bat
+        - git
+        - neovim
+        - pipenv
+        - tmux
+        - ripgrep
+        - zsh-completions
+
+  - name: Install Python
+    homebrew:
+      name:
+        - python@3.7
+        - python@3.9
+
+  - name: Apps
+    homebrew_cask:
+      name: docker
+      state: present

@@ -1,0 +1,7 @@
+---
+  - name: Personal
+    hosts: all
+    roles:
+      - common
+      - console
+      - apps

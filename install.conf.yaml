@@ -1,10 +1,15 @@
-- default:
+- defaults:
     link:
         relink: true
 - clean: []
 - link:
-    ~/.vimrc: .vimrc
+    ~/.config/nvim: .config/nvim
     ~/.tmux.conf: .tmux.conf
     ~/.gitconfig: .gitconfig
-    ~/.gitignore: .gitignore
-- shell: []
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
+  - [/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"]
+  - brew install ansible
+  - command: ./run-ansible.sh
+    stdin: true
+    stdout: true
