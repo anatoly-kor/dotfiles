@@ -1,10 +1,9 @@
-local cyberpunk = require('user.cyberpunk')
 require('hardline').setup {
     bufferline = true,  -- enable bufferline
     bufferline_settings = {
         show_index = false,
     },
-    theme = tundra,
+    theme = gruvbox,
     sections = {
         {class = 'mode', item = require('hardline.parts.mode').get_item},
         {class = 'med', item = require('hardline.parts.filename').get_item},

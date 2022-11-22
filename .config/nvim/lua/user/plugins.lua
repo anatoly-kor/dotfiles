@@ -50,6 +50,7 @@ return packer.startup(function(use)
   use "pineapplegiant/spaceduck"
   use 'dracula/vim'
   use 'sam4llis/nvim-tundra'
+  use 'morhetz/gruvbox'
 
   -- cmp plugins
   use 'hrsh7th/cmp-nvim-lsp'
@@ -80,6 +81,7 @@ return packer.startup(function(use)
   }
   use "nvim-telescope/telescope.nvim"
   use "ja-ford/delaytrain.nvim"
+  use "ggandor/leap.nvim"
 
   -- Bufferline
   use 'ojroques/nvim-hardline' -- bufferline and statusline

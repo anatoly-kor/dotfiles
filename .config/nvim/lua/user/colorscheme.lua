@@ -1,1 +1,1 @@
-vim.cmd "colorscheme tundra"
+vim.cmd "colorscheme gruvbox"
