@@ -74,11 +74,6 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  ["FixCursorHold.nvim"] = {
-    loaded = true,
-    path = "/Users/ak/.local/share/nvim/site/pack/packer/start/FixCursorHold.nvim",
-    url = "https://github.com/antoinemadec/FixCursorHold.nvim"
-  },
   LuaSnip = {
     loaded = true,
     path = "/Users/ak/.local/share/nvim/site/pack/packer/start/LuaSnip",
@@ -89,30 +84,20 @@ _G.packer_plugins = {
     path = "/Users/ak/.local/share/nvim/site/pack/packer/start/cmp-buffer",
     url = "https://github.com/hrsh7th/cmp-buffer"
   },
-  ["cmp-cmdline"] = {
-    loaded = true,
-    path = "/Users/ak/.local/share/nvim/site/pack/packer/start/cmp-cmdline",
-    url = "https://github.com/hrsh7th/cmp-cmdline"
-  },
   ["cmp-nvim-lsp"] = {
     loaded = true,
     path = "/Users/ak/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
-  ["cmp-nvim-lsp-signature-help"] = {
+  ["cmp-nvim-lua"] = {
     loaded = true,
-    path = "/Users/ak/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp-signature-help",
-    url = "https://github.com/hrsh7th/cmp-nvim-lsp-signature-help"
+    path = "/Users/ak/.local/share/nvim/site/pack/packer/start/cmp-nvim-lua",
+    url = "https://github.com/hrsh7th/cmp-nvim-lua"
   },
   ["cmp-path"] = {
     loaded = true,
     path = "/Users/ak/.local/share/nvim/site/pack/packer/start/cmp-path",
     url = "https://github.com/hrsh7th/cmp-path"
-  },
-  ["cmp-tabnine"] = {
-    loaded = true,
-    path = "/Users/ak/.local/share/nvim/site/pack/packer/start/cmp-tabnine",
-    url = "https://github.com/tzachar/cmp-tabnine"
   },
   cmp_luasnip = {
     loaded = true,
@@ -123,11 +108,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/ak/.local/share/nvim/site/pack/packer/start/dashboard-nvim",
     url = "https://github.com/glepnir/dashboard-nvim"
-  },
-  ["delaytrain.nvim"] = {
-    loaded = true,
-    path = "/Users/ak/.local/share/nvim/site/pack/packer/start/delaytrain.nvim",
-    url = "https://github.com/ja-ford/delaytrain.nvim"
   },
   ["editorconfig-vim"] = {
     loaded = true,
@@ -144,11 +124,6 @@ _G.packer_plugins = {
     path = "/Users/ak/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
   },
-  gruvbox = {
-    loaded = true,
-    path = "/Users/ak/.local/share/nvim/site/pack/packer/start/gruvbox",
-    url = "https://github.com/morhetz/gruvbox"
-  },
   harpoon = {
     loaded = true,
     path = "/Users/ak/.local/share/nvim/site/pack/packer/start/harpoon",
@@ -164,20 +139,25 @@ _G.packer_plugins = {
     path = "/Users/ak/.local/share/nvim/site/pack/packer/start/leap.nvim",
     url = "https://github.com/ggandor/leap.nvim"
   },
-  neotest = {
+  ["lsp-zero.nvim"] = {
     loaded = true,
-    path = "/Users/ak/.local/share/nvim/site/pack/packer/start/neotest",
-    url = "https://github.com/nvim-neotest/neotest"
+    path = "/Users/ak/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim",
+    url = "https://github.com/VonHeikemen/lsp-zero.nvim"
   },
-  ["neotest-python"] = {
+  ["mason-lspconfig.nvim"] = {
     loaded = true,
-    path = "/Users/ak/.local/share/nvim/site/pack/packer/start/neotest-python",
-    url = "https://github.com/nvim-neotest/neotest-python"
+    path = "/Users/ak/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
+    url = "https://github.com/williamboman/mason-lspconfig.nvim"
   },
-  ["null-ls.nvim"] = {
+  ["mason.nvim"] = {
     loaded = true,
-    path = "/Users/ak/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
-    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
+    path = "/Users/ak/.local/share/nvim/site/pack/packer/start/mason.nvim",
+    url = "https://github.com/williamboman/mason.nvim"
+  },
+  neovim = {
+    loaded = true,
+    path = "/Users/ak/.local/share/nvim/site/pack/packer/start/neovim",
+    url = "https://github.com/rose-pine/neovim"
   },
   ["nvim-cmp"] = {
     loaded = true,
@@ -188,11 +168,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/ak/.local/share/nvim/site/pack/packer/start/nvim-hardline",
     url = "https://github.com/ojroques/nvim-hardline"
-  },
-  ["nvim-lsp-installer"] = {
-    loaded = true,
-    path = "/Users/ak/.local/share/nvim/site/pack/packer/start/nvim-lsp-installer",
-    url = "https://github.com/williamboman/nvim-lsp-installer"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -214,11 +189,6 @@ _G.packer_plugins = {
     path = "/Users/ak/.local/share/nvim/site/pack/packer/start/nvim-treesitter-context",
     url = "https://github.com/nvim-treesitter/nvim-treesitter-context"
   },
-  ["nvim-tundra"] = {
-    loaded = true,
-    path = "/Users/ak/.local/share/nvim/site/pack/packer/start/nvim-tundra",
-    url = "https://github.com/sam4llis/nvim-tundra"
-  },
   ["nvim-web-devicons"] = {
     loaded = true,
     path = "/Users/ak/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
@@ -239,16 +209,6 @@ _G.packer_plugins = {
     path = "/Users/ak/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
-  ["popup.nvim"] = {
-    loaded = true,
-    path = "/Users/ak/.local/share/nvim/site/pack/packer/start/popup.nvim",
-    url = "https://github.com/nvim-lua/popup.nvim"
-  },
-  spaceduck = {
-    loaded = true,
-    path = "/Users/ak/.local/share/nvim/site/pack/packer/start/spaceduck",
-    url = "https://github.com/pineapplegiant/spaceduck"
-  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/Users/ak/.local/share/nvim/site/pack/packer/start/telescope.nvim",
@@ -259,25 +219,15 @@ _G.packer_plugins = {
     path = "/Users/ak/.local/share/nvim/site/pack/packer/start/tslime.vim",
     url = "https://github.com/jgdavey/tslime.vim"
   },
-  ["twilight.nvim"] = {
+  undotree = {
     loaded = true,
-    path = "/Users/ak/.local/share/nvim/site/pack/packer/start/twilight.nvim",
-    url = "https://github.com/folke/twilight.nvim"
-  },
-  vim = {
-    loaded = true,
-    path = "/Users/ak/.local/share/nvim/site/pack/packer/start/vim",
-    url = "https://github.com/dracula/vim"
+    path = "/Users/ak/.local/share/nvim/site/pack/packer/start/undotree",
+    url = "https://github.com/mbbill/undotree"
   },
   ["vim-commentary"] = {
     loaded = true,
     path = "/Users/ak/.local/share/nvim/site/pack/packer/start/vim-commentary",
     url = "https://github.com/tpope/vim-commentary"
-  },
-  ["vim-cyberpunk"] = {
-    loaded = true,
-    path = "/Users/ak/.local/share/nvim/site/pack/packer/start/vim-cyberpunk",
-    url = "https://github.com/thedenisnikulin/vim-cyberpunk"
   },
   ["vim-fugitive"] = {
     loaded = true,

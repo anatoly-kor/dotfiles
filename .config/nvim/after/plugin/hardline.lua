@@ -3,7 +3,7 @@ require('hardline').setup {
     bufferline_settings = {
         show_index = false,
     },
-    theme = gruvbox,
+    theme = one,
     sections = {
         {class = 'mode', item = require('hardline.parts.mode').get_item},
         {class = 'med', item = require('hardline.parts.filename').get_item},
