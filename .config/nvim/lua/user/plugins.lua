@@ -1,97 +1,76 @@
-vim.cmd.packadd('packer.nvim')
+return {
+	"nvim-lua/plenary.nvim",
 
-vim.cmd [[
-augroup packer_user_config
-autocmd!
-autocmd BufWritePost plugins.lua source <afile> | PackerSync
-augroup end
-]]
+	-- Colorschemes
+	{
+		"rose-pine/neovim",
+		priority = 1000,
+		lazy = false,
+	},
 
--- Use a protected call so we don't error out on first use
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then
-    return
-end
+	-- Treesitter(syntax highlighting)
+	{ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" },
+	"nvim-treesitter/nvim-treesitter-context",
 
--- Have packer use a popup window
-packer.init {
-    display = {
-        open_fn = function()
-            return require("packer.util").float { border = "rounded" }
-        end,
-    },
+	-- Navigation
+	{ "ThePrimeagen/harpoon", lazy = true },
+	{
+		"kyazdani42/nvim-tree.lua",
+		lazy = true,
+		dependencies = {
+			"kyazdani42/nvim-web-devicons",
+		},
+	},
+	{
+		"nvim-telescope/telescope-fzf-native.nvim",
+		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+	},
+	"nvim-telescope/telescope.nvim",
+	-- { 'ggandor/leap.nvim', lazy = true, },
+
+	-- GIT
+	{ "tpope/vim-fugitive" },
+	{ "mbbill/undotree" },
+	{ "lewis6991/gitsigns.nvim" },
+	{ "pwntester/octo.nvim", event = "VeryLazy" },
+
+	-- Bufferline
+	"ojroques/nvim-hardline",
+
+	-- Dashboard
+	"glepnir/dashboard-nvim",
+
+	-- Code
+	{ "tpope/vim-commentary" },
+	{ "tpope/vim-surround" }, -- FIXME: check for configure. s is braking
+	{ "editorconfig/editorconfig-vim", lazy = true },
+	{ "Vimjas/vim-python-pep8-indent", lazy = true },
+	{ "puremourning/vimspector", event = "VeryLazy" },
+	{ "vim-test/vim-test", lazy = true },
+	{ "jgdavey/tslime.vim", lazy = true },
+	"lukas-reineke/indent-blankline.nvim",
+
+	-- cmp
+	{ "hrsh7th/nvim-cmp" },
+	{ "hrsh7th/cmp-buffer" },
+	{ "hrsh7th/cmp-path" },
+	{ "hrsh7th/cmp-nvim-lua" },
+
+	-- snippets
+	"L3MON4D3/LuaSnip", -- snippet engine
+	"saadparwaiz1/cmp_luasnip", -- for autocompletion
+
+	-- lsp
+	{ "williamboman/mason.nvim" },
+	{ "williamboman/mason-lspconfig.nvim" },
+
+	{ "neovim/nvim-lspconfig" },
+	{ "hrsh7th/cmp-nvim-lsp" },
+	{ "glepnir/lspsaga.nvim", branch = "main" }, -- enhanced lsp uis
+	"onsails/lspkind.nvim", -- vs-code like icons for autocompletion
+
+	-- formatting and linting
+	"jose-elias-alvarez/null-ls.nvim", -- configure formatters & linters
+	"jayp0521/mason-null-ls.nvim", -- bridges gap b/w mason & null-ls
+	"windwp/nvim-autopairs", -- autoclose parens, brackets, quotes, etc...
 }
-
-return require('packer').startup(function(use)
-    -- Packer can manage itself
-    use 'wbthomason/packer.nvim'
-    use "nvim-lua/plenary.nvim"
-
-    -- Colorschemes
-    use({ 'rose-pine/neovim' })
-
-    -- Treesitter(syntax highlighting)
-    use({'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'})
-    use 'nvim-treesitter/nvim-treesitter-context'
-
-    -- Navigation
-    use "ThePrimeagen/harpoon"
-    use { 
-        'kyazdani42/nvim-tree.lua',
-        requires = {
-            'kyazdani42/nvim-web-devicons'
-        },
-    }
-    use "nvim-telescope/telescope.nvim"
-    -- use "ja-ford/delaytrain.nvim"  -- COMMENT: Надоело
-    use "ggandor/leap.nvim"
-
-    -- GIT
-    use('tpope/vim-fugitive')
-    use('mbbill/undotree')
-    use "lewis6991/gitsigns.nvim"
-    use 'pwntester/octo.nvim'
-
-    -- LSP
-    use {
-        'VonHeikemen/lsp-zero.nvim',
-        requires = {
-            -- LSP Support
-            {'neovim/nvim-lspconfig'},
-            {'williamboman/mason.nvim'},
-            {'williamboman/mason-lspconfig.nvim'},
-            -- {'hrsh7th/cmp-nvim-lsp-signature-help'},
-
-            -- Autocompletion
-            {'hrsh7th/nvim-cmp'},
-            {'hrsh7th/cmp-buffer'},
-            {'hrsh7th/cmp-path'},
-            {'saadparwaiz1/cmp_luasnip'},
-            {'hrsh7th/cmp-nvim-lsp'},
-            {'hrsh7th/cmp-nvim-lua'},
-            -- {'tzachar/cmp-tabnine', run='./install.sh'},
-
-            -- Snippets
-            {'L3MON4D3/LuaSnip'},
-            {'rafamadriz/friendly-snippets'},
-        }
-    }
-
-    -- Bufferline
-    use 'ojroques/nvim-hardline' -- bufferline and statusline
-
-    -- Dashboard
-    use 'glepnir/dashboard-nvim'
-
-    -- Code
-    use "tpope/vim-commentary"
-    use "tpope/vim-surround"
-    use "editorconfig/editorconfig-vim"
-    use 'Vimjas/vim-python-pep8-indent'
-    use 'puremourning/vimspector'
-    use 'vim-test/vim-test'
-    use 'jgdavey/tslime.vim'
-    use 'lukas-reineke/indent-blankline.nvim'
-
-end)
-

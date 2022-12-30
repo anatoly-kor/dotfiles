@@ -36,7 +36,8 @@ local options = {
   sidescrolloff = 8,
   guifont = "monospace:h17",               -- the font used in graphical neovim applications
   undodir = os.getenv("HOME") .. "/.vim/undodir",
-  colorcolumn = "100"
+  colorcolumn = "100",
+  autoindent = true,
 }
 
 vim.opt.shortmess:append "c"
