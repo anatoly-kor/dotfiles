@@ -14,9 +14,7 @@ null_ls.setup({
 		formatting.stylua, -- lua formatter
 		formatting.isort,
 		diagnostics.flake8,
-		formatting.flake8,
 		diagnostics.mypy,
-		formatting.json,
 	},
 	-- configure format on save
 	on_attach = function(current_client, bufnr)

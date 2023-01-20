@@ -13,10 +13,9 @@ return {
 	"nvim-treesitter/nvim-treesitter-context",
 
 	-- Navigation
-	{ "ThePrimeagen/harpoon", lazy = true },
+	{ "ThePrimeagen/harpoon" },
 	{
 		"kyazdani42/nvim-tree.lua",
-		lazy = true,
 		dependencies = {
 			"kyazdani42/nvim-web-devicons",
 		},
@@ -43,11 +42,11 @@ return {
 	-- Code
 	{ "tpope/vim-commentary" },
 	{ "tpope/vim-surround" }, -- FIXME: check for configure. s is braking
-	{ "editorconfig/editorconfig-vim", lazy = true },
-	{ "Vimjas/vim-python-pep8-indent", lazy = true },
+	{ "editorconfig/editorconfig-vim" },
+	{ "Vimjas/vim-python-pep8-indent" },
 	{ "puremourning/vimspector", event = "VeryLazy" },
-	{ "vim-test/vim-test", lazy = true },
-	{ "jgdavey/tslime.vim", lazy = true },
+	{ "vim-test/vim-test" },
+	{ "jgdavey/tslime.vim" },
 	"lukas-reineke/indent-blankline.nvim",
 
 	-- cmp
