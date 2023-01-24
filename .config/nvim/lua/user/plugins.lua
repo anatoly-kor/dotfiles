@@ -7,6 +7,11 @@ return {
 		priority = 1000,
 		lazy = false,
 	},
+	{
+		"AlexvZyl/nordic.nvim",
+		priority = 1000,
+		lazy = false,
+	},
 
 	-- Treesitter(syntax highlighting)
 	{ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" },
