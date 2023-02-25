@@ -14,8 +14,8 @@ return {
 	},
 
 	-- Treesitter(syntax highlighting)
-	{ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" },
-	"nvim-treesitter/nvim-treesitter-context",
+	{ "nvim-treesitter/nvim-treesitter" },
+	{ "nvim-treesitter/nvim-treesitter-context" },
 
 	-- Navigation
 	{ "ThePrimeagen/harpoon" },
@@ -52,7 +52,8 @@ return {
 	{ "puremourning/vimspector", event = "VeryLazy" },
 	{ "vim-test/vim-test" },
 	{ "jgdavey/tslime.vim" },
-	"lukas-reineke/indent-blankline.nvim",
+	{ "lukas-reineke/indent-blankline.nvim" },
+	{ "m4xshen/smartcolumn.nvim" },
 
 	-- cmp
 	{ "hrsh7th/nvim-cmp" },
@@ -61,7 +62,7 @@ return {
 	{ "hrsh7th/cmp-nvim-lua" },
 
 	-- snippets
-	"L3MON4D3/LuaSnip", -- snippet engine
+	-- "L3MON4D3/LuaSnip", -- snippet engine
 	"saadparwaiz1/cmp_luasnip", -- for autocompletion
 
 	-- lsp

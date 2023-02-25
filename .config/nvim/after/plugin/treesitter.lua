@@ -1,13 +1,19 @@
+-- vim.opt.runtimepath:append("/Users/a.korobov/.local/share/nvim/parsers/")
+
 require("nvim-treesitter.configs").setup({
+	-- parser_install_dir = "/Users/a.korobov/.local/share/nvim/parsers/",
 	-- A list of parser names, or "all"
 	ensure_installed = {
-		"help",
+		"c",
 		"lua",
-		"python",
+		"vim",
+		"help",
 		"json",
 		"yaml",
-		"dockerfile",
 		"gitignore",
+		"python",
+		"markdown",
+		"markdown_inline",
 	},
 
 	indent = { enable = true },

@@ -5,4 +5,4 @@ require("nordic").setup({
 })
 
 -- set colorscheme after options
-vim.cmd("colorscheme nordic")
+-- vim.cmd("colorscheme nordic")
