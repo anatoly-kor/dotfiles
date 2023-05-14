@@ -39,5 +39,13 @@ require("rose-pine").setup({
 	-- },
 })
 
+require("nordic").setup({
+	telescope = {
+		style = "classic",
+	},
+})
+
+-- require("oh-lucy-evening").setup()
+
 -- set colorscheme after options
-vim.cmd("colorscheme rose-pine")
+vim.cmd("colorscheme oh-lucy-evening")

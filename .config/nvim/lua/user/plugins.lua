@@ -1,81 +1,95 @@
-return {
-	"nvim-lua/plenary.nvim",
+-- This file can be loaded by calling `lua require('plugins')` from your init.vim
 
-	-- Colorschemes
-	{
-		"rose-pine/neovim",
-		priority = 1000,
-		lazy = false,
-	},
-	{
-		"AlexvZyl/nordic.nvim",
-		priority = 1000,
-		lazy = false,
-	},
+-- Only required if you have packer configured as `opt`
+vim.cmd([[packadd packer.nvim]])
 
-	-- Treesitter(syntax highlighting)
-	{ "nvim-treesitter/nvim-treesitter" },
-	{ "nvim-treesitter/nvim-treesitter-context" },
+return require("packer").startup(function(use)
+    -- Packer can manage itself
+    use("wbthomason/packer.nvim")
 
-	-- Navigation
-	{ "ThePrimeagen/harpoon" },
-	{
-		"kyazdani42/nvim-tree.lua",
-		dependencies = {
-			"kyazdani42/nvim-web-devicons",
-		},
-	},
-	{
-		"nvim-telescope/telescope-fzf-native.nvim",
-		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
-	},
-	"nvim-telescope/telescope.nvim",
-	-- { 'ggandor/leap.nvim', lazy = true, },
+    use("nvim-lua/plenary.nvim")
 
-	-- GIT
-	{ "tpope/vim-fugitive" },
-	{ "mbbill/undotree" },
-	{ "lewis6991/gitsigns.nvim" },
-	{ "pwntester/octo.nvim", event = "VeryLazy" },
+    -- Colorschemes
+    use({ "rose-pine/neovim" })
+    use({ "AlexvZyl/nordic.nvim" })
+    use({ "Yazeed1s/oh-lucy.nvim" })
 
-	-- Bufferline
-	"ojroques/nvim-hardline",
+    -- Treesitter(syntax highlighting)
+    use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+    use({ "nvim-treesitter/nvim-treesitter-context" })
+    use({ "nvim-treesitter/nvim-treesitter-textobjects" })
 
-	-- Dashboard
-	"glepnir/dashboard-nvim",
+    -- Navigation
+    use({ "ThePrimeagen/harpoon" })
+    use({
+        "kyazdani42/nvim-tree.lua",
+        requires = {
+            "kyazdani42/nvim-web-devicons",
+        },
+        tag = "nightly",
+    })
+    -- {
+    -- 	"nvim-telescope/telescope-fzf-native.nvim"
+    -- 	build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
+    -- }
+    use("nvim-telescope/telescope.nvim")
+    use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
-	-- Code
-	{ "tpope/vim-commentary" },
-	{ "tpope/vim-surround" }, -- FIXME: check for configure. s is braking
-	{ "editorconfig/editorconfig-vim" },
-	{ "Vimjas/vim-python-pep8-indent" },
-	{ "puremourning/vimspector", event = "VeryLazy" },
-	{ "vim-test/vim-test" },
-	{ "jgdavey/tslime.vim" },
-	{ "lukas-reineke/indent-blankline.nvim" },
-	{ "m4xshen/smartcolumn.nvim" },
+    -- GIT
+    use({ "tpope/vim-fugitive" })
+    use({ "mbbill/undotree" })
+    use({ "lewis6991/gitsigns.nvim" })
+    use({ "pwntester/octo.nvim" })
+    use({ "f-person/git-blame.nvim" })
 
-	-- cmp
-	{ "hrsh7th/nvim-cmp" },
-	{ "hrsh7th/cmp-buffer" },
-	{ "hrsh7th/cmp-path" },
-	{ "hrsh7th/cmp-nvim-lua" },
+    -- Bufferline
+    use("ojroques/nvim-hardline")
 
-	-- snippets
-	-- "L3MON4D3/LuaSnip", -- snippet engine
-	"saadparwaiz1/cmp_luasnip", -- for autocompletion
+    -- Dashboard
+    use("glepnir/dashboard-nvim")
 
-	-- lsp
-	{ "williamboman/mason.nvim" },
-	{ "williamboman/mason-lspconfig.nvim" },
+    -- Code
+    use({ "tpope/vim-commentary" })
+    use({ "tpope/vim-surround" }) -- FIXME: check for configure. s is braking
+    use({ "editorconfig/editorconfig-vim" })
+    use({ "Vimjas/vim-python-pep8-indent" })
+    use({ "puremourning/vimspector" })
+    use({ "vim-test/vim-test" })
+    use({ "jgdavey/tslime.vim" })
+    use({ "lukas-reineke/indent-blankline.nvim" })
+    use({ "m4xshen/smartcolumn.nvim" })
+    use({ "andythigpen/nvim-coverage" })
+    use({ "Wansmer/treesj" })
+    use({ "kevinhwang91/nvim-bqf", run = ":TSUpdate" })
 
-	{ "neovim/nvim-lspconfig" },
-	{ "hrsh7th/cmp-nvim-lsp" },
-	{ "glepnir/lspsaga.nvim", branch = "main" }, -- enhanced lsp uis
-	"onsails/lspkind.nvim", -- vs-code like icons for autocompletion
+    -- cmp
+    use({ "hrsh7th/nvim-cmp" })
+    use({ "hrsh7th/cmp-buffer" })
+    use({ "hrsh7th/cmp-path" })
+    use({ "hrsh7th/cmp-nvim-lua" })
 
-	-- formatting and linting
-	"jose-elias-alvarez/null-ls.nvim", -- configure formatters & linters
-	"jayp0521/mason-null-ls.nvim", -- bridges gap b/w mason & null-ls
-	"windwp/nvim-autopairs", -- autoclose parens, brackets, quotes, etc...
-}
+    -- snippets
+    use("L3MON4D3/LuaSnip") -- snippet engine
+    use("saadparwaiz1/cmp_luasnip") -- for autocompletion
+
+    -- lsp
+    use({ "williamboman/mason.nvim" })
+    use({ "williamboman/mason-lspconfig.nvim" })
+
+    use({ "neovim/nvim-lspconfig" })
+    use({ "hrsh7th/cmp-nvim-lsp" })
+    use({ "glepnir/lspsaga.nvim", branch = "main" }) -- enhanced lsp uis
+    use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
+    use({ "ray-x/lsp_signature.nvim" })
+
+    -- formatting and linting
+    use("jose-elias-alvarez/null-ls.nvim") -- configure formatters & linters
+    use("jayp0521/mason-null-ls.nvim") -- bridges gap b/w mason & null-ls
+    use("windwp/nvim-autopairs") -- autoclose parens brackets, quotes, etc...
+
+    -- remote development
+    -- use("chipsenkbeil/distant.nvim")
+
+    -- cheatsheet
+    use({ "sudormrfbin/cheatsheet.nvim" })
+end)

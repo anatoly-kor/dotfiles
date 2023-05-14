@@ -22,7 +22,8 @@ vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("n", "gp", "`[v`]")
 
-vim.keymap.set("n", "J", "mzJ`z")
+-- vim.keymap.set("n", "J", "mzJ`z")
+vim.keymap.set("n", "J", ":lua require('treesj').toggle()<CR>")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
@@ -45,4 +46,19 @@ vim.keymap.set("n", "<leader>gd", ":Gdiff<cr>")
 vim.keymap.set("n", "<leader>gh", ":diffget //2<cr>")
 vim.keymap.set("n", "<leader>gl", ":diffget //3<cr>")
 vim.keymap.set("n", "<leader>orpl", ":Octo pr list<cr>")
-vim.keymap.set("n", "<leader>b", ":Gitsigns toggle_current_line_blame<CR>")
+-- vim.keymap.set("n", "<leader>b", ":Gitsigns toggle_current_line_blame<CR>")
+vim.keymap.set("n", "<leader>cc", ":G commit <CR>")
+vim.keymap.set("n", "<leader>p", ":G push -u origin <CR>")
+
+local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
+
+-- Repeat movement with ; and ,
+-- ensure ; goes forward and , goes backward regardless of the last direction
+vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
+vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)
+
+-- Optionally, make builtin f, F, t, T also repeatable with ; and ,
+vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f)
+vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F)
+vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t)
+vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T)
