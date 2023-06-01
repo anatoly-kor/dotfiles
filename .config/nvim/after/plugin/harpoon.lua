@@ -17,4 +17,4 @@ vim.keymap.set("n", "<leader>l", function()
     ui.nav_file(4)
 end)
 
-vim.keymap.set("n", "<leader>r", ":Telescope harpoon marks<CR>")
+vim.keymap.set("n", "<leader>m", ":Telescope harpoon marks<CR>")

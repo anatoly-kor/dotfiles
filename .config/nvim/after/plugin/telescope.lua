@@ -1,11 +1,11 @@
 local telescope_setup, telescope = pcall(require, "telescope")
 if not telescope_setup then
-	return
+    return
 end
 
 local actions_setup, actions = pcall(require, "telescope.actions")
 if not actions_setup then
-	return
+    return
 end
 
 local builtin = require("telescope.builtin")
@@ -16,28 +16,28 @@ vim.keymap.set("n", "<leader>gb", builtin.git_branches, {})
 vim.keymap.set("n", "<C-g>", builtin.live_grep, {})
 
 telescope.setup({
-	extensions = {
-		fzf = {
-			fuzzy = true,
-			override_generic_sorter = true,
-			override_file_sorter = true,
-			case_mode = "smart_case",
-		},
-	},
-	defaults = {
-		layout_strategy = "vertical",
-		layout_config = {
-			height = 0.9,
-			width = 0.9,
-		},
-		mappings = {
-			i = {
-				["<C-k>"] = actions.move_selection_previous, -- move to prev result
-				["<C-j>"] = actions.move_selection_next, -- move to next result
-				["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist, -- send selected to quickfixlist
-			},
-		},
-	},
+    extensions = {
+        fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = "smart_case",
+        },
+    },
+    defaults = {
+        layout_strategy = "vertical",
+        layout_config = {
+            height = 0.9,
+            width = 0.9,
+        },
+        mappings = {
+            i = {
+                ["<C-k>"] = actions.move_selection_previous, -- move to prev result
+                ["<C-j>"] = actions.move_selection_next, -- move to next result
+                ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist, -- send selected to quickfixlist
+            },
+        },
+    },
 })
 
 telescope.load_extension("fzf")
