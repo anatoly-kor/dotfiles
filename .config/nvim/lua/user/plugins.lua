@@ -20,13 +20,17 @@ local plugins = {
     "rose-pine/neovim",
     "AlexvZyl/nordic.nvim",
     "Yazeed1s/oh-lucy.nvim",
-    "kyazdani42/nvim-web-devicons",
+    { "kyazdani42/nvim-web-devicons", lazy = true },
 
     -- Treesitter(syntax highlighting)
     { "nvim-treesitter/nvim-treesitter" },
-    { "nvim-treesitter/nvim-treesitter-context", dependencies = {
-        "nvim-treesitter/nvim-treesitter",
-    } },
+    {
+        "nvim-treesitter/nvim-treesitter-context",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            build = ":TSUpdate",
+        },
+    },
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
         dependencies = {
@@ -42,19 +46,21 @@ local plugins = {
     },
     "nvim-telescope/telescope.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    "debugloop/telescope-undo.nvim",
 
     -- GIT
     "tpope/vim-fugitive",
-    "mbbill/undotree",
-    "lewis6991/gitsigns.nvim",
+    { "mbbill/undotree", event = "VeryLazy" },
     "pwntester/octo.nvim",
     "f-person/git-blame.nvim",
+    "sindrets/diffview.nvim", -- CONFIGURE ME
 
     -- Bufferline
     "ojroques/nvim-hardline",
 
     -- Dashboard
-    "glepnir/dashboard-nvim",
+    -- { "glepnir/dashboard-nvim", event = "VimEnter" },
+    "startup-nvim/startup.nvim",
     {
         "folke/noice.nvim",
         event = "VeryLazy",
@@ -76,7 +82,9 @@ local plugins = {
     "m4xshen/smartcolumn.nvim",
     "andythigpen/nvim-coverage",
     "Wansmer/treesj",
-    "kevinhwang91/nvim-bqf",
+    { "kevinhwang91/nvim-bqf", dependencies = {
+        "junegunn/fzf",
+    } },
 
     -- cmp
     "hrsh7th/nvim-cmp",
@@ -107,6 +115,6 @@ local plugins = {
     -- use("chipsenkbeil/distant.nvim")
 
     -- cheatsheet
-    "sudormrfbin/cheatsheet.nvim",
+    { "sudormrfbin/cheatsheet.nvim", event = "VeryLazy" },
 }
 require("lazy").setup(plugins, opts)
