@@ -49,7 +49,7 @@ local plugins = {
     "debugloop/telescope-undo.nvim",
 
     -- GIT
-    "tpope/vim-fugitive",
+    -- "tpope/vim-fugitive",
     { "mbbill/undotree", event = "VeryLazy" },
     "pwntester/octo.nvim",
     "f-person/git-blame.nvim",
