@@ -19,7 +19,7 @@ local plugins = {
     -- Colorschemes
     "rose-pine/neovim",
     "AlexvZyl/nordic.nvim",
-    "Yazeed1s/oh-lucy.nvim",
+    { "Yazeed1s/oh-lucy.nvim", priority = 1000 },
     { "kyazdani42/nvim-web-devicons", lazy = true },
 
     -- Treesitter(syntax highlighting)
@@ -54,12 +54,12 @@ local plugins = {
     "pwntester/octo.nvim",
     "f-person/git-blame.nvim",
     "sindrets/diffview.nvim", -- CONFIGURE ME
+    { "NeogitOrg/neogit", dependencies = "nvim-lua/plenary.nvim" },
 
     -- Bufferline
     "ojroques/nvim-hardline",
 
     -- Dashboard
-    -- { "glepnir/dashboard-nvim", event = "VimEnter" },
     "startup-nvim/startup.nvim",
     {
         "folke/noice.nvim",
@@ -76,6 +76,14 @@ local plugins = {
     "editorconfig/editorconfig-vim",
     "Vimjas/vim-python-pep8-indent",
     "puremourning/vimspector",
+    -- {
+    --     "mfussenegger/nvim-dap-python",
+    --     dependencies = { "mfussenegger/nvim-dap" },
+    -- },
+    -- {
+    --     "rcarriga/nvim-dap-ui",
+    --     dependencies = { "mfussenegger/nvim-dap" },
+    -- },
     "vim-test/vim-test",
     "jgdavey/tslime.vim",
     "lukas-reineke/indent-blankline.nvim",

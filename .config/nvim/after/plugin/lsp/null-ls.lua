@@ -26,7 +26,7 @@ local defaults = {
     on_exit = nil,
     root_dir = require("null-ls.utils").root_pattern(".null-ls-root", "Makefile", ".git"),
     should_attach = nil,
-    sources = nil,
+    -- sources = nil,
     temp_dir = nil,
     update_in_insert = false,
 }

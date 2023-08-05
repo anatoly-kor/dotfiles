@@ -15,6 +15,14 @@ vim.keymap.set("n", "<leader>c", builtin.git_commits, {})
 vim.keymap.set("n", "<leader>bc", builtin.git_bcommits, {})
 vim.keymap.set("n", "<leader>gb", builtin.git_branches, {})
 vim.keymap.set("n", "<C-g>", builtin.live_grep, {})
+local bufopts = { noremap = true, silent = true, buffer = bufnr }
+vim.keymap.set("n", "gi", function()
+    require("telescope.builtin").lsp_implementations()
+end, bufopts)
+
+vim.keymap.set("n", "gr", function()
+    require("telescope.builtin").lsp_references()
+end, bufopts)
 
 telescope.setup({
     extensions = {
@@ -56,6 +64,24 @@ telescope.setup({
                 ["<C-j>"] = actions.move_selection_next, -- move to next result
                 ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist, -- send selected to quickfixlist
                 ["<C-s>"] = actions.send_to_qflist + actions.open_qflist,
+            },
+        },
+        lsp_implementations = {
+            layout_strategy = "vertical",
+            layout_config = {
+                width = 0.9,
+                height = 0.9,
+                preview_cutoff = 1,
+                mirror = false,
+            },
+        },
+        lsp_references = {
+            layout_strategy = "vertical",
+            layout_config = {
+                width = 0.9,
+                height = 0.9,
+                preview_cutoff = 1,
+                mirror = false,
             },
         },
     },
