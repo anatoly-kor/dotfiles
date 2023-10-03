@@ -20,7 +20,7 @@ local plugins = {
     "rose-pine/neovim",
     "AlexvZyl/nordic.nvim",
     { "Yazeed1s/oh-lucy.nvim", priority = 1000 },
-    { "kyazdani42/nvim-web-devicons", lazy = true },
+    { "kyazdani42/nvim-web-devicons" },
 
     -- Treesitter(syntax highlighting)
     { "nvim-treesitter/nvim-treesitter" },
@@ -49,17 +49,16 @@ local plugins = {
     "debugloop/telescope-undo.nvim",
 
     -- GIT
-    -- "tpope/vim-fugitive",
+    "tpope/vim-fugitive",
     { "mbbill/undotree", event = "VeryLazy" },
     "pwntester/octo.nvim",
     "f-person/git-blame.nvim",
     "sindrets/diffview.nvim", -- CONFIGURE ME
-    { "NeogitOrg/neogit", dependencies = "nvim-lua/plenary.nvim" },
 
     -- Bufferline
     "ojroques/nvim-hardline",
 
-    -- Dashboard
+    -- UI
     "startup-nvim/startup.nvim",
     {
         "folke/noice.nvim",
@@ -69,6 +68,7 @@ local plugins = {
             "rcarriga/nvim-notify",
         },
     },
+    { "stevearc/dressing.nvim", event = "VeryLazy" },
 
     -- Code
     "tpope/vim-commentary",
@@ -90,19 +90,26 @@ local plugins = {
     "m4xshen/smartcolumn.nvim",
     "andythigpen/nvim-coverage",
     "Wansmer/treesj",
-    { "kevinhwang91/nvim-bqf", dependencies = {
-        "junegunn/fzf",
-    } },
+    {
+        "kevinhwang91/nvim-bqf",
+        dependencies = {
+            "junegunn/fzf",
+        },
+    },
 
     -- cmp
-    "hrsh7th/nvim-cmp",
-    "hrsh7th/cmp-buffer",
-    "hrsh7th/cmp-path",
-    "hrsh7th/cmp-nvim-lua",
-
-    -- snippets
-    "L3MON4D3/LuaSnip", -- snippet engine
-    "saadparwaiz1/cmp_luasnip", -- for autocompletion
+    {
+        "hrsh7th/nvim-cmp",
+        event = "InsertEnter",
+        dependencies = {
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-nvim-lua",
+            -- snippets
+            "L3MON4D3/LuaSnip", -- snippet engine
+            "saadparwaiz1/cmp_luasnip", -- for autocompletion
+        },
+    },
 
     -- lsp
     "williamboman/mason.nvim",
@@ -110,7 +117,6 @@ local plugins = {
 
     "neovim/nvim-lspconfig",
     "hrsh7th/cmp-nvim-lsp",
-    { "glepnir/lspsaga.nvim", branch = "main" }, -- enhanced lsp uis
     "onsails/lspkind.nvim", -- vs-code like icons for autocompletion
     "ray-x/lsp_signature.nvim",
 

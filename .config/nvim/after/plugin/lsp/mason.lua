@@ -15,9 +15,8 @@ require("mason-lspconfig").setup({
         "pyright",
         "bashls",
         "dockerls",
-        "jsonls",
-        "sqlls",
     },
+    automatic_installation = true,
 })
 
 require("mason-null-ls").setup({
@@ -26,8 +25,6 @@ require("mason-null-ls").setup({
         "lua_ls",
         "bashls",
         "dockerls",
-        "jsonls",
-        "sqlls",
 
         "flake8",
         "isort",

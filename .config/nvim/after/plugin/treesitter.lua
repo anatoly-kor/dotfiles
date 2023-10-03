@@ -34,4 +34,14 @@ require("nvim-treesitter.configs").setup({
         enable = true,
         additional_vim_regex_highlighting = false,
     },
+
+    incremental_selection = {
+        enable = true,
+        keymaps = {
+            init_selection = "gis",
+            node_incremental = "gin",
+            scope_incremental = "gsi",
+            node_decremental = "gdn",
+        },
+    },
 })

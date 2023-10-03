@@ -16,6 +16,9 @@ end
 require("luasnip/loaders/from_vscode").lazy_load()
 
 cmp.setup({
+    completion = {
+        completeopt = "menu,menuone,preview,noselect", -- ADDED last
+    },
     snippet = {
         expand = function(args)
             luasnip.lsp_expand(args.body)
@@ -27,19 +30,18 @@ cmp.setup({
     },
     mapping = cmp.mapping.preset.insert({
         ["<S-Tab>"] = cmp.mapping.select_prev_item(), -- previous suggestion
-        ["<Tab>"] = cmp.mapping.select_next_item(), -- next suggestion
-        ["<C-b>"] = cmp.mapping.scroll_docs(-4), -- FIXME: is it works?
+        ["<Tab>"] = cmp.mapping.select_next_item(),   -- next suggestion
+        ["<C-b>"] = cmp.mapping.scroll_docs(-4),      -- FIXME: is it works?
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
-        ["<C-e>"] = cmp.mapping.abort(), -- close completion window
+        ["<C-Space>"] = cmp.mapping.complete(),       -- show completion suggestions
+        ["<C-e>"] = cmp.mapping.abort(),              -- close completion window
         ["<CR>"] = cmp.mapping.confirm({ select = false }),
     }),
     -- sources for autocompletion
     sources = cmp.config.sources({
-        { name = "codeium" },
+        { name = "buffer" },   -- text within current buffer
         { name = "nvim_lsp" }, -- lsp
-        { name = "buffer" }, -- text within current buffer
-        { name = "luasnip" }, -- snippets
+        { name = "luasnip" },  -- snippets
         { name = "cmp_nvim_lsp" },
         { name = "nvim-cmp" },
         { name = "nvim_lua" },
