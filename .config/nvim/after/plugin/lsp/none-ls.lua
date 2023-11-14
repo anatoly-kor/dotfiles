@@ -3,34 +3,6 @@ if not setup then
     return
 end
 
-local formatting = null_ls.builtins.formatting
-local diagnostics = null_ls.builtins.diagnostics
-local code_actions = null_ls.builtins.code_actions
--- local spell = null_ls.builtins.completion
-
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
-local defaults = {
-    border = nil,
-    cmd = { "nvim" },
-    debounce = 250,
-    debug = false,
-    default_timeout = 5000,
-    diagnostic_config = {},
-    diagnostics_format = "#{m}",
-    fallback_severity = vim.diagnostic.severity.ERROR,
-    log_level = "warn",
-    notify_format = "[null-ls] %s",
-    on_attach = nil,
-    on_init = nil,
-    on_exit = nil,
-    root_dir = require("null-ls.utils").root_pattern(".null-ls-root", "Makefile", ".git"),
-    should_attach = nil,
-    -- sources = nil,
-    temp_dir = nil,
-    update_in_insert = false,
-}
-
 local async_formatting = function(bufnr)
     bufnr = bufnr or vim.api.nvim_get_current_buf()
 
@@ -57,30 +29,42 @@ local async_formatting = function(bufnr)
     end)
 end
 
--- configure null_ls
+local formatting = null_ls.builtins.formatting
+local diagnostics = null_ls.builtins.diagnostics
+local code_actions = null_ls.builtins.code_actions
+
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
 null_ls.setup({
-    defaults = defaults,
     sources = {
         formatting.stylua, -- lua formatter
-        formatting.isort,
         formatting.isort.with({
             extra_args = {
                 "--up",
+                "-m=3",
+                -- "--fgw=2",
+                "--tc",
             },
         }),
         formatting.fixjson,
-        diagnostics.flake8,
+        diagnostics.autoflake,
+        -- FIXME: Как читать конфиг .flake8 если тот существует?
         diagnostics.flake8.with({
+            prefer_local = true,
             extra_args = {
-                "--max-line-length",
-                109,
+                "--max-line-length=119",
             },
         }),
         diagnostics.mypy,
-        diagnostics.pylama,
+        diagnostics.pylama.with({
+            extra_args = {
+                "--max-line-length=119",
+            },
+        }),
         code_actions.git,
         code_actions.refactoring,
     },
+    debug = false,
     on_attach = function(client, bufnr)
         if client.supports_method("textDocument/formatting") then
             vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })

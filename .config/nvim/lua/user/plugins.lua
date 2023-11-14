@@ -19,7 +19,7 @@ local plugins = {
     -- Colorschemes
     "rose-pine/neovim",
     "AlexvZyl/nordic.nvim",
-    { "Yazeed1s/oh-lucy.nvim", priority = 1000 },
+    { "Yazeed1s/oh-lucy.nvim",          priority = 1000 },
     { "kyazdani42/nvim-web-devicons" },
 
     -- Treesitter(syntax highlighting)
@@ -47,16 +47,18 @@ local plugins = {
     "nvim-telescope/telescope.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     "debugloop/telescope-undo.nvim",
+    "rmagatti/goto-preview",
 
     -- GIT
     "tpope/vim-fugitive",
-    { "mbbill/undotree", event = "VeryLazy" },
     "pwntester/octo.nvim",
     "f-person/git-blame.nvim",
-    "sindrets/diffview.nvim", -- CONFIGURE ME
+    -- "sindrets/diffview.nvim", -- CONFIGURE ME
 
     -- Bufferline
-    "ojroques/nvim-hardline",
+    -- "ojroques/nvim-hardline",
+    "sontungexpt/sttusline",
+    { "willothy/nvim-cokeline",                   config = true },
 
     -- UI
     "startup-nvim/startup.nvim",
@@ -68,7 +70,7 @@ local plugins = {
             "rcarriga/nvim-notify",
         },
     },
-    { "stevearc/dressing.nvim", event = "VeryLazy" },
+    { "stevearc/dressing.nvim",        event = "VeryLazy" },
 
     -- Code
     "tpope/vim-commentary",
@@ -86,7 +88,8 @@ local plugins = {
     -- },
     "vim-test/vim-test",
     "jgdavey/tslime.vim",
-    "lukas-reineke/indent-blankline.nvim",
+    -- "lukas-reineke/indent-blankline.nvim",
+    "vidocqh/auto-indent.nvim",
     "m4xshen/smartcolumn.nvim",
     "andythigpen/nvim-coverage",
     "Wansmer/treesj",
@@ -96,6 +99,8 @@ local plugins = {
             "junegunn/fzf",
         },
     },
+    { "echasnovski/mini.cursorword",   version = "*" },
+    { "simrat39/symbols-outline.nvim", event = "VeryLazy" },
 
     -- cmp
     {
@@ -106,7 +111,7 @@ local plugins = {
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-nvim-lua",
             -- snippets
-            "L3MON4D3/LuaSnip", -- snippet engine
+            "L3MON4D3/LuaSnip",         -- snippet engine
             "saadparwaiz1/cmp_luasnip", -- for autocompletion
         },
     },
@@ -119,11 +124,12 @@ local plugins = {
     "hrsh7th/cmp-nvim-lsp",
     "onsails/lspkind.nvim", -- vs-code like icons for autocompletion
     "ray-x/lsp_signature.nvim",
+    "hinell/lsp-timeout.nvim",
 
     -- formatting and linting
-    "jose-elias-alvarez/null-ls.nvim", -- configure formatters & linters
+    "nvimtools/none-ls.nvim",
     "jayp0521/mason-null-ls.nvim", -- bridges gap b/w mason & null-ls
-    "windwp/nvim-autopairs", -- autoclose parens brackets, quotes, etc...
+    "windwp/nvim-autopairs",       -- autoclose parens brackets, quotes, etc...
 
     -- remote development
     -- use("chipsenkbeil/distant.nvim")

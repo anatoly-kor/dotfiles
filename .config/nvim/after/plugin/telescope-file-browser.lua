@@ -1,2 +1,0 @@
--- vim.api.nvim_set_keymap("n", "<C-n>", ":Telescope file_browser<CR>", { noremap = true })
--- vim.api.nvim_set_keymap("n", "<C-n>", ":Telescope file_browser path=%:p:h select_buffer=true <CR>", { noremap = true })

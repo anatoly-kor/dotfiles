@@ -30,19 +30,20 @@ local on_attach = function(client, bufnr)
     local opts = { noremap = true, silent = true, buffer = bufnr }
 
     -- set keybinds
-    keymap.set("n", "gf", "<cmd>Lspsaga lsp_finder<CR>", opts) -- show definition, referencesLspsaga
+    -- keymap.set("n", "gf", "<cmd>Lspsaga lsp_finder<CR>", opts) -- show definition, referencesLspsaga
     keymap.set("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts) -- got to declaration
-    keymap.set("n", "gd", "<cmd>Lspsaga peek_definition<CR>", opts) -- see definition and make edits in window
-    keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts) -- see available code actions
-    keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opts) -- smart rename
-    keymap.set("n", "<leader>d", "<cmd>Lspsaga show_line_diagnostics<CR>", opts) -- show  diagnostics for line
-    keymap.set("n", "<leader>e", "<cmd>Lspsaga show_cursor_diagnostics<CR>", opts) -- show diagnostics for cursor
+    -- keymap.set("n", "gd", "<cmd>Lspsaga peek_definition<CR>", opts) -- see definition and make edits in window
+    -- keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts) -- see available code actions
+    -- keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opts) -- smart rename
+    -- keymap.set("n", "<leader>d", "<cmd>Lspsaga show_line_diagnostics<CR>", opts) -- show  diagnostics for line
+    -- keymap.set("n", "<leader>e", "<cmd>Lspsaga show_cursor_diagnostics<CR>", opts) -- show diagnostics for cursor
     keymap.set("n", "<leader>t", "<cmd>lua vim.diagnostic.open_float()<CR>", opts) -- show diagnostics for cursor
     keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts) -- jump to previous diagnostic in buffer
     keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts) -- jump to next diagnostic in buffer
     -- keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts) -- show documentation for what is under cursor
     keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-    keymap.set("n", "<leader>o", "<cmd>Lspsaga outline<CR>", opts) -- see outline on right hand side
+    -- keymap.set("n", "<leader>o", "<cmd>Lspsaga outline<CR>", opts) -- see outline on right hand side
+    keymap.set("n", "<leader>o", "<cmd>SymbolsOutline<CR>", opts) -- see outline on right hand side
 end
 
 -- used to enable autocompletion (assign to every lsp server config)
@@ -84,6 +85,41 @@ lspconfig["pyright"].setup({
     capabilities = capabilities,
     on_attach = on_attach,
 })
+
+-- → pylsp.configurationSources                                default: ["pycodestyle"]
+-- → pylsp.plugins.autopep8.enabled                            default: true
+-- → pylsp.plugins.flake8.config
+-- → pylsp.plugins.flake8.enabled                              default: false
+-- → pylsp.plugins.flake8.exclude                              default: []
+-- → pylsp.plugins.flake8.executable                           default: "flake8"
+-- → pylsp.plugins.flake8.filename
+-- → pylsp.plugins.flake8.hangClosing
+-- → pylsp.plugins.flake8.ignore                               default: []
+-- → pylsp.plugins.flake8.indentSize
+-- → pylsp.plugins.flake8.maxComplexity
+-- → pylsp.plugins.flake8.maxLineLength
+-- → pylsp.plugins.flake8.perFileIgnores                       default: []
+-- → pylsp.plugins.flake8.select
+-- lspconfig["pylsp"].setup({
+--     capabilities = capabilities,
+--     on_attach = on_attach,
+--     settings = {
+--         pylsp = {
+--             configurationSources = { 'flake8' },
+--             plugins = {
+--                 flake8 = {
+--                     config = '.flake8',
+--                     enabed = true,
+--                     maxLineLength = 119,
+--                 },
+--                 pycodestyle = {
+--                     enabled = false,
+--                     -- maxLineLength = 119,
+--                 },
+--             },
+--         },
+--     },
+-- })
 
 lspconfig["dockerls"].setup({
     capabilities = capabilities,

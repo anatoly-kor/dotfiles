@@ -48,10 +48,6 @@ vim.keymap.set("n", "<leader>gl", ":diffget //3<cr>")
 vim.keymap.set("n", "<leader>orpl", ":Octo pr list<cr>")
 vim.keymap.set("n", "<leader>cc", ":G commit <CR>")
 vim.keymap.set("n", "<leader>p", ":G push -u origin <CR>")
--- vim.keymap.set("n", "<leader>cc", ":Neogit commit <CR>")
--- vim.keymap.set("n", "<leader>gs", ":Neogit kind=split<cr>")
--- vim.keymap.set("n", "<leader>l", ":Neogit pull<CR>")
--- vim.keymap.set("n", "<leader>p", ":Neogit push -u origin<CR>")
 
 local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
 

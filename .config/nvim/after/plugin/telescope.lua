@@ -11,8 +11,8 @@ end
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>f", builtin.find_files, {})
 vim.keymap.set("n", "<C-p>", builtin.git_files, {})
-vim.keymap.set("n", "<leader>c", builtin.git_commits, {})
-vim.keymap.set("n", "<leader>bc", builtin.git_bcommits, {})
+-- vim.keymap.set("n", "<leader>c", builtin.git_commits, {})
+-- vim.keymap.set("n", "<leader>bc", builtin.git_bcommits, {})
 vim.keymap.set("n", "<leader>gb", builtin.git_branches, {})
 vim.keymap.set("n", "<C-g>", builtin.live_grep, {})
 local bufopts = { noremap = true, silent = true, buffer = bufnr }
@@ -60,8 +60,8 @@ telescope.setup({
         },
         mappings = {
             i = {
-                ["<C-k>"] = actions.move_selection_previous,                       -- move to prev result
-                ["<C-j>"] = actions.move_selection_next,                           -- move to next result
+                ["<C-k>"] = actions.move_selection_previous, -- move to prev result
+                ["<C-j>"] = actions.move_selection_next, -- move to next result
                 ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist, -- send selected to quickfixlist
                 ["<C-s>"] = actions.send_to_qflist + actions.open_qflist,
             },

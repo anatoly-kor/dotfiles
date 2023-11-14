@@ -12,11 +12,11 @@ noice.setup({
     presets = {
         -- you can enable a preset by setting it to true, or a table that will override the preset config
         -- you can also add custom presets that you can enable/disable with enabled=true
-        bottom_search = false, -- use a classic bottom cmdline for search
-        command_palette = false, -- position the cmdline and popupmenu together
+        bottom_search = false,        -- use a classic bottom cmdline for search
+        command_palette = false,      -- position the cmdline and popupmenu together
         long_message_to_split = true, -- long messages will be sent to a split
-        inc_rename = true, -- enables an input dialog for inc-rename.nvim
-        lsp_doc_border = true, -- add a border to hover docs and signature help
+        inc_rename = true,            -- enables an input dialog for inc-rename.nvim
+        lsp_doc_border = true,        -- add a border to hover docs and signature help
     },
     routes = {
         {
@@ -28,15 +28,3 @@ noice.setup({
         view = "cmdline",
     },
 })
-
--- vim.keymap.set({ "n", "i", "s" }, "<c-f>", function()
---     if not require("noice.lsp").scroll(4) then
---         return "<c-f>"
---     end
--- end, { silent = true, expr = true })
-
--- vim.keymap.set({ "n", "i", "s" }, "<c-b>", function()
---     if not require("noice.lsp").scroll(-4) then
---         return "<c-b>"
---     end
--- end, { silent = true, expr = true })
