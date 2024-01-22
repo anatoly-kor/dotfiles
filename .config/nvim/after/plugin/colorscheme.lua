@@ -1,51 +1,58 @@
-require("rose-pine").setup({
-    --- @usage 'main' | 'moon'
-    dark_variant = "main",
-    bold_vert_split = false,
-    dim_nc_background = false,
-    disable_background = false,
-    disable_float_background = false,
-    disable_italics = true,
+-- require("rose-pine").setup({
+--     --- @usage 'main' | 'moon'
+--     dark_variant = "main",
+--     bold_vert_split = false,
+--     dim_nc_background = false,
+--     disable_background = false,
+--     disable_float_background = false,
+--     disable_italics = true,
 
-    --- @usage string hex value or named color from rosepinetheme.com/palette
-    groups = {
-        background = "base",
-        panel = "surface",
-        border = "highlight_med",
-        comment = "muted",
-        link = "iris",
-        punctuation = "subtle",
+--     --- @usage string hex value or named color from rosepinetheme.com/palette
+--     groups = {
+--         background = "base",
+--         panel = "surface",
+--         border = "highlight_med",
+--         comment = "muted",
+--         link = "iris",
+--         punctuation = "subtle",
 
-        error = "love",
-        hint = "iris",
-        info = "foam",
-        warn = "gold",
+--         error = "love",
+--         hint = "iris",
+--         info = "foam",
+--         warn = "gold",
 
-        headings = {
-            h1 = "iris",
-            h2 = "foam",
-            h3 = "rose",
-            h4 = "gold",
-            h5 = "pine",
-            h6 = "foam",
-        },
-        -- or set all headings at once
-        -- headings = 'subtle'
-    },
+--         headings = {
+--             h1 = "iris",
+--             h2 = "foam",
+--             h3 = "rose",
+--             h4 = "gold",
+--             h5 = "pine",
+--             h6 = "foam",
+--         },
+--         -- or set all headings at once
+--         -- headings = 'subtle'
+--     },
 
-    -- Change specific vim highlight groups
-    -- highlight_groups = {
-    -- 	ColorColumn = { bg = "rose" },
-    -- },
-})
+--     -- Change specific vim highlight groups
+--     -- highlight_groups = {
+--     -- 	ColorColumn = { bg = "rose" },
+--     -- },
+-- })
 
-require("nordic").setup({
-    telescope = {
-        style = "classic",
-    },
-})
+-- require("nordic").setup({
+--     telescope = {
+--         style = "classic",
+--     },
+-- })
 
 -- require("oh-lucy-evening").setup()
 
 -- set colorscheme after options
-vim.cmd("colorscheme oh-lucy-evening")
+-- vim.cmd("colorscheme oh-lucy-evening")
+require('onedark').setup {
+    style = 'cool',
+    code_style = {
+        comment = 'italic'
+    }
+}
+require('onedark').load()

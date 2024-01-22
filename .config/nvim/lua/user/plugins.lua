@@ -17,9 +17,10 @@ local plugins = {
     "nvim-lua/plenary.nvim",
 
     -- Colorschemes
-    "rose-pine/neovim",
-    "AlexvZyl/nordic.nvim",
-    { "Yazeed1s/oh-lucy.nvim",          priority = 1000 },
+    -- "rose-pine/neovim",
+    -- "AlexvZyl/nordic.nvim",
+    -- { "Yazeed1s/oh-lucy.nvim", priority = 1000 },
+    { "navarasu/onedark.nvim",          priority = 1000 },
     { "kyazdani42/nvim-web-devicons" },
 
     -- Treesitter(syntax highlighting)
@@ -101,6 +102,7 @@ local plugins = {
     },
     { "echasnovski/mini.cursorword",   version = "*" },
     { "simrat39/symbols-outline.nvim", event = "VeryLazy" },
+    { "arjunmahishi/flow.nvim",        event = "VeryLazy" },
 
     -- cmp
     {
@@ -123,7 +125,7 @@ local plugins = {
     "neovim/nvim-lspconfig",
     "hrsh7th/cmp-nvim-lsp",
     "onsails/lspkind.nvim", -- vs-code like icons for autocompletion
-    "ray-x/lsp_signature.nvim",
+    -- "ray-x/lsp_signature.nvim",
     "hinell/lsp-timeout.nvim",
 
     -- formatting and linting

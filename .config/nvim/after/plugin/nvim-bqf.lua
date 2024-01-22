@@ -1,5 +1,7 @@
-vim.keymap.set("n", "<leader>qfo", ":copen<CR>")
-vim.keymap.set("n", "<leader>qfc", ":cclose<CR>")
+vim.keymap.set("n", "<leader>qo", ":copen<CR>")
+vim.keymap.set("n", "<leader>qc", ":cclose<CR>")
+vim.keymap.set("n", "<leader>qn", "<cmd>cnext<CR>")
+vim.keymap.set("n", "<leader>qp", "<cmd>cprev<CR>")
 
 require("bqf").setup({
     auto_enable = true,

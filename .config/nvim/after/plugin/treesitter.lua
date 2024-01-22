@@ -1,5 +1,3 @@
--- vim.opt.runtimepath:append("/Users/a.korobov/.local/share/nvim/parsers/")
-
 require("nvim-treesitter.configs").setup({
     -- parser_install_dir = "/Users/a.korobov/.local/share/nvim/parsers/",
     -- A list of parser names, or "all"
@@ -7,6 +5,8 @@ require("nvim-treesitter.configs").setup({
         "c",
         "lua",
         "vim",
+        "vimdoc",
+        "query",
         -- "help",
         "regex",
         "json",
@@ -15,6 +15,10 @@ require("nvim-treesitter.configs").setup({
         "python",
         "markdown",
         "markdown_inline",
+        "bash",
+        "comment",
+        "dockerfile",
+        "gitcommit",
     },
 
     indent = { enable = true },
@@ -27,7 +31,7 @@ require("nvim-treesitter.configs").setup({
 
     -- Automatically install missing parsers when entering buffer
     -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-    auto_install = false,
+    auto_install = true,
 
     highlight = {
         -- `false` will disable the whole extension

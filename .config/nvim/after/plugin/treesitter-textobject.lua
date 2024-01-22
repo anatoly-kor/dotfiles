@@ -5,8 +5,8 @@ require("nvim-treesitter.configs").setup({
             enable = true,
             set_jumps = true, -- whether to set jumps in the jumplist
             goto_next_start = {
-                ["]m"] = "@function.outer",
-                ["]]"] = { query = "@class.outer", desc = "Next class start" },
+                [")"] = "@function.outer",
+                ["]"] = { query = "@class.outer", desc = "Next class start" },
                 --
                 -- You can use regex matching (i.e. lua pattern) and/or pass a list in a "query" key to group multiple queires.
                 -- ["]o"] = "@loop.*",
@@ -17,18 +17,18 @@ require("nvim-treesitter.configs").setup({
                 -- ["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
                 -- ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
             },
-            goto_next_end = {
-                ["]M"] = "@function.outer",
-                ["]["] = "@class.outer",
-            },
+            -- goto_next_end = {
+            --     ["]M"] = "@function.outer",
+            --     ["]["] = "@class.outer",
+            -- },
             goto_previous_start = {
-                ["[m"] = "@function.outer",
-                ["[["] = "@class.outer",
+                ["("] = "@function.outer",
+                ["["] = "@class.outer",
             },
-            goto_previous_end = {
-                ["[M"] = "@function.outer",
-                ["[]"] = "@class.outer",
-            },
+            -- goto_previous_end = {
+            --     ["[M"] = "@function.outer",
+            --     ["[]"] = "@class.outer",
+            -- },
             -- Below will go to either the start or the end, whichever is closer.
             -- Use if you want more granular movements
             -- Make it even more gradual by adding multiple queries and regex.
@@ -65,7 +65,7 @@ require("nvim-treesitter.configs").setup({
             -- mapping query_strings to modes.
             selection_modes = {
                 ["@parameter.outer"] = "v", -- charwise
-                ["@function.outer"] = "V", -- linewise
+                ["@function.outer"] = "V",  -- linewise
                 ["@class.outer"] = "<c-v>", -- blockwise
             },
             -- If you set this to `true` (default is `false`) then any textobject is
