@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+HOME_DIR="$HOME"
+CACHE_FILE="$HOME_DIR/.cache_aiflow_selector.txt"
+
+# Время кэша в секундах
+NOW=$(date +%s)
+
+# Создаем кэш файл если его нет
+if ! test -f $CACHE_FILE; then
+        touch "$CACHE_FILE"
+fi
+
+
+# Проверяем существование и размер кэш-файла
+if [ -f "$CACHE_FILE" ] && [ -s "$CACHE_FILE" ]; then
+        # Получаем время создания файла
+        FILETIME=$(date +%s -r "$CACHE_FILE")
+
+        # Считаем разницу между текущим временем и временем создания файла
+        DIFF=$((NOW - FILETIME))
+
+        # Если разница меньше 5 минут, используем закэшированные результаты
+        if [ "${DIFF}" -lt "1800" ]; then
+                selected_dag=`cat $CACHE_FILE | fzf`
+                if [[ $selected_dag == *"_last command:"* ]]; then
+                        # Разбиваем строку по :
+                        IFS=":" read -r prefix command <<< "$selected_dag"
+                        command=${command# }
+                        command=${command% }
+                        echo "Запускаю команду: $command"
+                        eval "$command"
+                        exit
+                fi
+
+        else
+                list_dags=`airflow list_dags | awk '/^DAGS$/{flag=1;next} /^\s*$/{flag=0} flag{gsub(/^[ \t]*|[ \t]*$/,""); print}'`
+                selected_dag=`echo "$list_dags" | fzf`
+                echo "$list_dags" > $CACHE_FILE
+        fi
+else
+        list_dags=`airflow list_dags | awk '/^DAGS$/{flag=1;next} /^\s*$/{flag=0} flag{gsub(/^[ \t]*|[ \t]*$/,""); print}'`
+        selected_dag=`echo "$list_dags" | fzf`
+        echo "$list_dags" > $CACHE_FILE
+fi
+
+
+
+if [[ -z $selected_dag ]]; then
+    echo "Ой все!"
+    exit 0
+fi
+
+
+
+list_tasks=`airflow list_tasks $selected_dag | grep -oE "^[a-z0-9_]+$"`
+selected_task=`echo $list_tasks | sed 's/ /\\n/g' | fzf`
+
+if [[ -z $selected_task ]]; then
+    echo "А все уже все!"
+    exit 0
+fi
+
+read -p "Дата (ГГГГ-ММ-ДД): " execution_date
+echo "Запускаю команду: airflow test $selected_dag $selected_task $execution_date"
+echo "_last command: airflow test $selected_dag $selected_task $execution_date" >> $CACHE_FILE
+airflow test $selected_dag $selected_task $execution_date
