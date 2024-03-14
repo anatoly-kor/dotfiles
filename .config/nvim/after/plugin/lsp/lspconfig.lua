@@ -14,10 +14,10 @@ vim.diagnostic.config({
     virtual_text = false,
     underline = true,
     update_in_insert = true,
-    severity_sort = true,
+    severity_sort = false,
     float = {
         focusable = false,
-        style = "minimal",
+        style = "full",
         source = "always",
         header = "",
         prefix = "",

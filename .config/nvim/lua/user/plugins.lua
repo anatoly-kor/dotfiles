@@ -45,40 +45,40 @@ local plugins = {
         "kyazdani42/nvim-tree.lua",
         tag = "nightly",
     },
-    "nvim-telescope/telescope.nvim",
+    { "nvim-telescope/telescope.nvim" },
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     "debugloop/telescope-undo.nvim",
     "rmagatti/goto-preview",
 
     -- GIT
     "tpope/vim-fugitive",
-    "pwntester/octo.nvim",
-    "f-person/git-blame.nvim",
-    -- "sindrets/diffview.nvim", -- CONFIGURE ME
+    -- "pwntester/octo.nvim",
+    "f-person/git-blame.nvim", -- FIXME: find replace for open url
+    "sindrets/diffview.nvim",  -- CONFIGURE ME
 
     -- Bufferline
     -- "ojroques/nvim-hardline",
     "sontungexpt/sttusline",
-    { "willothy/nvim-cokeline",                   config = true },
+    { "willothy/nvim-cokeline", config = true },
 
     -- UI
     "startup-nvim/startup.nvim",
     {
-        "folke/noice.nvim",
+        "folke/noice.nvim", -- FIXME: CONFIGURE ME
         event = "VeryLazy",
         dependencies = {
             "MunifTanjim/nui.nvim",
             "rcarriga/nvim-notify",
         },
     },
-    { "stevearc/dressing.nvim",        event = "VeryLazy" },
+    { "stevearc/dressing.nvim", event = "VeryLazy" },
 
     -- Code
     "tpope/vim-commentary",
     "tpope/vim-surround", -- FIXME: check for configure. s is braking
     "editorconfig/editorconfig-vim",
     "Vimjas/vim-python-pep8-indent",
-    "puremourning/vimspector",
+    -- "puremourning/vimspector",
     -- {
     --     "mfussenegger/nvim-dap-python",
     --     dependencies = { "mfussenegger/nvim-dap" },
@@ -121,10 +121,11 @@ local plugins = {
     -- lsp
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
 
-    "neovim/nvim-lspconfig",
+    "neovim/nvim-lspconfig", -- RECONFIGURE ME
     "hrsh7th/cmp-nvim-lsp",
-    "onsails/lspkind.nvim", -- vs-code like icons for autocompletion
+    "onsails/lspkind.nvim",  -- vs-code like icons for autocompletion
     -- "ray-x/lsp_signature.nvim",
     "hinell/lsp-timeout.nvim",
 

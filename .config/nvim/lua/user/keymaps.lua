@@ -7,8 +7,11 @@ vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.keymap.set("i", "jk", "<ESC>")
 
 -- Navigate buffers
-vim.keymap.set("n", "<C-l>", ":bnext<CR>")
-vim.keymap.set("n", "<C-h>", ":bprevious<CR>")
+-- vim.keymap.set("n", "<C-l>", ":bnext<CR>")
+-- vim.keymap.set("n", "<C-h>", ":bprevious<CR>")
+
+vim.keymap.set("n", "<C-l>", "<Plug>(cokeline-focus-next)")
+vim.keymap.set("n", "<C-h>", "<Plug>(cokeline-focus-prev)")
 
 -- Buffers --
 vim.keymap.set("n", "<leader>bd", ":bd<cr>")

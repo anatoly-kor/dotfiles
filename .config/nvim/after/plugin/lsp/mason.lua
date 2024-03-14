@@ -38,3 +38,13 @@ require("mason-null-ls").setup({
     -- auto-install configured formatters & linters (with null-ls)
     automatic_installation = true,
 })
+
+require("mason-tool-installer").setup({
+    ensure_installed = {
+        "debugpy",
+        "flake8",
+        "isort",
+        "mypy",
+    },
+    automatic_installation = true,
+})
