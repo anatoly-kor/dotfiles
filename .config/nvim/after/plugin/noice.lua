@@ -1,3 +1,4 @@
+-- Either disable the other plugin or set `config.lsp.signature.enabled = false` in your **Noice** config.
 local noice = require("noice")
 
 noice.setup({
@@ -40,6 +41,7 @@ noice.setup({
             merge = true,
         },
     },
+    lsp = { signature = { enabled = false } }
 })
 
 -- noice.setup({

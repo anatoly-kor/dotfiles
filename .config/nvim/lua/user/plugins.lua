@@ -20,7 +20,7 @@ local plugins = {
     -- "rose-pine/neovim",
     -- "AlexvZyl/nordic.nvim",
     -- { "Yazeed1s/oh-lucy.nvim", priority = 1000 },
-    { "navarasu/onedark.nvim",          priority = 1000 },
+    { "navarasu/onedark.nvim", priority = 1000 },
     { "kyazdani42/nvim-web-devicons" },
 
     -- Treesitter(syntax highlighting)
@@ -47,14 +47,14 @@ local plugins = {
     },
     { "nvim-telescope/telescope.nvim" },
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-    "debugloop/telescope-undo.nvim",
-    "rmagatti/goto-preview",
+    { "debugloop/telescope-undo.nvim", event = "VeryLazy" },
+    { "rmagatti/goto-preview", event = "VeryLazy" },
 
     -- GIT
-    "tpope/vim-fugitive",
+    { "tpope/vim-fugitive", event = "VeryLazy" },
     -- "pwntester/octo.nvim",
-    "f-person/git-blame.nvim", -- FIXME: find replace for open url
-    "sindrets/diffview.nvim",  -- CONFIGURE ME
+    { "f-person/git-blame.nvim", event = "VeryLazy" }, -- FIXME: find replace for open url
+    { "sindrets/diffview.nvim", event = "VeryLazy" }, -- CONFIGURE ME
 
     -- Bufferline
     -- "ojroques/nvim-hardline",
@@ -74,10 +74,10 @@ local plugins = {
     { "stevearc/dressing.nvim", event = "VeryLazy" },
 
     -- Code
-    "tpope/vim-commentary",
-    "tpope/vim-surround", -- FIXME: check for configure. s is braking
-    "editorconfig/editorconfig-vim",
-    "Vimjas/vim-python-pep8-indent",
+    { "tpope/vim-commentary" },
+    { "tpope/vim-surround", event = "VeryLazy" }, -- FIXME: check for configure. s is braking
+    { "editorconfig/editorconfig-vim", event = "VeryLazy" },
+    -- "Vimjas/vim-python-pep8-indent",  -- FIXME: Is it usefull?
     -- "puremourning/vimspector",
     -- {
     --     "mfussenegger/nvim-dap-python",
@@ -87,22 +87,16 @@ local plugins = {
     --     "rcarriga/nvim-dap-ui",
     --     dependencies = { "mfussenegger/nvim-dap" },
     -- },
-    "vim-test/vim-test",
-    "jgdavey/tslime.vim",
+    { "vim-test/vim-test", event = "VeryLazy" },
+    { "jgdavey/tslime.vim", event = "VeryLazy" },
     -- "lukas-reineke/indent-blankline.nvim",
-    "vidocqh/auto-indent.nvim",
-    "m4xshen/smartcolumn.nvim",
-    "andythigpen/nvim-coverage",
-    "Wansmer/treesj",
-    {
-        "kevinhwang91/nvim-bqf",
-        dependencies = {
-            "junegunn/fzf",
-        },
-    },
-    { "echasnovski/mini.cursorword",   version = "*" },
+    { "vidocqh/auto-indent.nvim", event = "InsertEnter" },
+    { "m4xshen/smartcolumn.nvim", event = "VeryLazy" },
+    { "Wansmer/treesj", event = "VeryLazy" },
+    { "kevinhwang91/nvim-bqf", event = "VeryLazy", dependencies = { "junegunn/fzf" } },
+    { "echasnovski/mini.cursorword", version = "*", event = "VeryLazy" },
     { "simrat39/symbols-outline.nvim", event = "VeryLazy" },
-    { "arjunmahishi/flow.nvim",        event = "VeryLazy" },
+    { "arjunmahishi/flow.nvim", event = "VeryLazy" },
 
     -- cmp
     {
@@ -113,7 +107,7 @@ local plugins = {
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-nvim-lua",
             -- snippets
-            "L3MON4D3/LuaSnip",         -- snippet engine
+            "L3MON4D3/LuaSnip", -- snippet engine
             "saadparwaiz1/cmp_luasnip", -- for autocompletion
         },
     },
@@ -125,14 +119,13 @@ local plugins = {
 
     "neovim/nvim-lspconfig", -- RECONFIGURE ME
     "hrsh7th/cmp-nvim-lsp",
-    "onsails/lspkind.nvim",  -- vs-code like icons for autocompletion
-    -- "ray-x/lsp_signature.nvim",
-    "hinell/lsp-timeout.nvim",
+    { "onsails/lspkind.nvim", event = "VeryLazy" }, -- vs-code like icons for autocompletion
+    { "ray-x/lsp_signature.nvim", event = "VeryLazy" },
 
     -- formatting and linting
     "nvimtools/none-ls.nvim",
     "jayp0521/mason-null-ls.nvim", -- bridges gap b/w mason & null-ls
-    "windwp/nvim-autopairs",       -- autoclose parens brackets, quotes, etc...
+    { "windwp/nvim-autopairs", event = "VeryLazy" }, -- autoclose parens brackets, quotes, etc...
 
     -- remote development
     -- use("chipsenkbeil/distant.nvim")

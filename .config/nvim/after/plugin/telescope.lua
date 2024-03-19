@@ -15,7 +15,11 @@ vim.keymap.set("n", "<C-p>", builtin.git_files, {})
 -- vim.keymap.set("n", "<leader>bc", builtin.git_bcommits, {})
 vim.keymap.set("n", "<leader>gb", builtin.git_branches, {})
 vim.keymap.set("n", "<C-g>", builtin.live_grep, {})
+vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
+vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
+vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
 local bufopts = { noremap = true, silent = true, buffer = bufnr }
+
 vim.keymap.set("n", "gi", function()
     require("telescope.builtin").lsp_implementations()
 end, bufopts)
@@ -23,6 +27,10 @@ end, bufopts)
 vim.keymap.set("n", "gr", function()
     require("telescope.builtin").lsp_references()
 end, bufopts)
+
+vim.keymap.set("n", "<leader>sn", function() -- FIXME: Is it usefull for me?
+    builtin.find_files({ cwd = vim.fn.stdpath("config") })
+end, { desc = "[S]earch [N]eovim files" })
 
 telescope.setup({
     extensions = {

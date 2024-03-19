@@ -46,6 +46,7 @@ cmp.setup({
         { name = "nvim-cmp" },
         { name = "nvim_lua" },
         { name = "path" }, -- file system paths
+        { name = 'pyright' },
     }),
     sorting = {
         comparators = {
