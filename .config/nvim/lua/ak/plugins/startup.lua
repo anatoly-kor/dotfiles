@@ -1,0 +1,66 @@
+-- TODO: Написать свой с фразой I USE NVIM (BTW)
+return {}
+-- return {
+
+--     "startup-nvim/startup.nvim",
+--     config = function()
+--         local custom_header = {
+--             [[]],
+--             [[]],
+--             [[]],
+--             [[]],
+--             [[]],
+--             [[    ⢰⣧⣼⣯⠄⣸⣠⣶⣶⣦⣾⠄⠄⠄⠄⡀⠄⢀⣿⣿⠄⠄⠄⢸⡇⠄⠄ ]],
+--             [[    ⣾⣿⠿⠿⠶⠿⢿⣿⣿⣿⣿⣦⣤⣄⢀⡅⢠⣾⣛⡉⠄⠄⠄⠸⢀⣿⠄ ]],
+--             [[   ⢀⡋⣡⣴⣶⣶⡀⠄⠄⠙⢿⣿⣿⣿⣿⣿⣴⣿⣿⣿⢃⣤⣄⣀⣥⣿⣿⠄ ]],
+--             [[   ⢸⣇⠻⣿⣿⣿⣧⣀⢀⣠⡌⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⠿⣿⣿⣿⠄ ]],
+--             [[  ⢀⢸⣿⣷⣤⣤⣤⣬⣙⣛⢿⣿⣿⣿⣿⣿⣿⡿⣿⣿⡍⠄⠄⢀⣤⣄⠉⠋⣰ ]],
+--             [[  ⣼⣖⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿⣿⣿⣿⣿⢇⣿⣿⡷⠶⠶⢿⣿⣿⠇⢀⣤ ]],
+--             [[ ⠘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣽⣿⣿⣿⡇⣿⣿⣿⣿⣿⣿⣷⣶⣥⣴⣿⡗ ]],
+--             [[ ⢀⠈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟  ]],
+--             [[ ⢸⣿⣦⣌⣛⣻⣿⣿⣧⠙⠛⠛⡭⠅⠒⠦⠭⣭⡻⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃  ]],
+--             [[ ⠘⣿⣿⣿⣿⣿⣿⣿⣿⡆⠄⠄⠄⠄⠄⠄⠄⠄⠹⠈⢋⣽⣿⣿⣿⣿⣵⣾⠃  ]],
+--             [[  ⠘⣿⣿⣿⣿⣿⣿⣿⣿⠄⣴⣿⣶⣄⠄⣴⣶⠄⢀⣾⣿⣿⣿⣿⣿⣿⠃   ]],
+--             [[   ⠈⠻⣿⣿⣿⣿⣿⣿⡄⢻⣿⣿⣿⠄⣿⣿⡀⣾⣿⣿⣿⣿⣛⠛⠁    ]],
+--             [[     ⠈⠛⢿⣿⣿⣿⠁⠞⢿⣿⣿⡄⢿⣿⡇⣸⣿⣿⠿⠛⠁      ]],
+--             [[        ⠉⠻⣿⣿⣾⣦⡙⠻⣷⣾⣿⠃⠿⠋⠁     ⢀⣠⣴ ]],
+--             [[ ⣿⣿⣿⣶⣶⣮⣥⣒⠲⢮⣝⡿⣿⣿⡆⣿⡿⠃⠄⠄⠄⠄⠄⠄⠄⣠⣴⣿⣿⣿ ]],
+--             [[]],
+--             [[]],
+--         }
+--         local custom_footer = { "SENPAI BE GENTLY" }
+
+--         require("startup").setup({
+--             section_1 = {
+--                 type = "text",
+--                 oldfiles_directory = false,
+--                 align = "center",
+--                 fold_section = false,
+--                 title = "title",
+--                 margin = 5,
+
+--                 content = custom_header,
+--                 highlight = "String",
+--                 default_color = "#FF0000",
+--                 oldfiles_amount = 0,
+--             },
+--             section_2 = {
+--                 type = "text",
+--                 oldfiles_directory = false,
+--                 align = "center",
+--                 fold_section = false,
+--                 title = "title",
+--                 margin = 5,
+--                 content = custom_footer,
+--                 highlight = "String",
+--                 default_color = "#FF0000",
+--                 oldfiles_amount = 5,
+--             },
+--             colors = {
+--                 background = "#1f2227",
+--                 folded_section = "#56b6c2",
+--             },
+--             parts = { "section_1", "section_2" },
+--         })
+--     end
+-- }
