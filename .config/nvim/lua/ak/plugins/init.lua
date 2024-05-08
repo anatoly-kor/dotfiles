@@ -4,7 +4,7 @@ return {
     { "kyazdani42/nvim-web-devicons" },
 
     { "tpope/vim-commentary" },
-    { "tpope/vim-surround", event = "VeryLazy" },
+    { "tpope/vim-surround",            event = "VeryLazy" },
     { "editorconfig/editorconfig-vim", event = "VeryLazy" },
 
     {

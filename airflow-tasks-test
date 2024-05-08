@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 HOME_DIR="$HOME"
-CACHE_FILE="$HOME_DIR/.cache_aiflow_selector.txt"
+CACHE_FILE="$HOME_DIR/.cache_aiflow_tasks_test.txt"
 
 # Время кэша в секундах
 NOW=$(date +%s)
@@ -11,11 +11,15 @@ if ! test -f $CACHE_FILE; then
         touch "$CACHE_FILE"
 fi
 
+# COMMAND="airflow"
+COMMAND="docker compose exec -it airflow-worker airflow"
+TEST_COMMAND="$COMMAND tasks test"
+
 
 # Проверяем существование и размер кэш-файла
 if [ -f "$CACHE_FILE" ] && [ -s "$CACHE_FILE" ]; then
         # Получаем время создания файла
-        FILETIME=$(date +%s -r "$CACHE_FILE")
+        FILETIME=$(stat -f %m "$CACHE_FILE")
 
         # Считаем разницу между текущим временем и временем создания файла
         DIFF=$((NOW - FILETIME))
@@ -34,12 +38,12 @@ if [ -f "$CACHE_FILE" ] && [ -s "$CACHE_FILE" ]; then
                 fi
 
         else
-                list_dags=`airflow list_dags | awk '/^DAGS$/{flag=1;next} /^\s*$/{flag=0} flag{gsub(/^[ \t]*|[ \t]*$/,""); print}'`
+                list_dags=`$COMMAND dags list | awk '{print $1}' | grep -oE "^[a-zA-Z0-9_]+$"`
                 selected_dag=`echo "$list_dags" | fzf`
                 echo "$list_dags" > $CACHE_FILE
         fi
 else
-        list_dags=`airflow list_dags | awk '/^DAGS$/{flag=1;next} /^\s*$/{flag=0} flag{gsub(/^[ \t]*|[ \t]*$/,""); print}'`
+        list_dags=`$COMMAND dags list | awk '{print $1}' | grep -oE "^[a-zA-Z0-9_]+$"`
         selected_dag=`echo "$list_dags" | fzf`
         echo "$list_dags" > $CACHE_FILE
 fi
@@ -53,7 +57,7 @@ fi
 
 
 
-list_tasks=`airflow list_tasks $selected_dag | grep -oE "^[a-z0-9_]+$"`
+list_tasks=`$COMMAND tasks list $selected_dag | grep -oE "^[a-zA-Z0-9_]+$"`
 selected_task=`echo $list_tasks | sed 's/ /\\n/g' | fzf`
 
 if [[ -z $selected_task ]]; then
@@ -62,6 +66,6 @@ if [[ -z $selected_task ]]; then
 fi
 
 read -p "Дата (ГГГГ-ММ-ДД): " execution_date
-echo "Запускаю команду: airflow test $selected_dag $selected_task $execution_date"
-echo "_last command: airflow test $selected_dag $selected_task $execution_date" >> $CACHE_FILE
-airflow test $selected_dag $selected_task $execution_date
+echo "Запускаю команду: $TEST_COMMAND $selected_dag $selected_task $execution_date"
+echo "_last command: $TEST_COMMAND $selected_dag $selected_task $execution_date" >> $CACHE_FILE
+$TEST_COMMAND $selected_dag $selected_task $execution_date

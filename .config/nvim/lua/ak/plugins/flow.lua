@@ -1,5 +1,4 @@
 return {
-
     "arjunmahishi/flow.nvim",
     event = "VeryLazy",
     config = function()

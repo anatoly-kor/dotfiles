@@ -52,7 +52,8 @@ return {
     config = function()
         local cmp = require("cmp")
         local cmp_lsp = require("cmp_nvim_lsp")
-        local capabilities = vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), cmp_lsp.default_capabilities())
+        local capabilities = vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(),
+            cmp_lsp.default_capabilities())
 
         require("fidget").setup({})
         require("luasnip/loaders/from_vscode").lazy_load()
@@ -150,6 +151,23 @@ return {
                     ellipsis_char = "...",
                 }),
             },
+        })
+
+        cmp.setup.cmdline({ "/", "?" }, {
+            mapping = cmp.mapping.preset.cmdline(),
+            sources = {
+                { name = "buffer" },
+            },
+        })
+
+        cmp.setup.cmdline(":", {
+            mapping = cmp.mapping.preset.cmdline(),
+            sources = cmp.config.sources({
+                { name = "path" },
+            }, {
+                { name = "cmdline" },
+            }),
+            matching = { disallow_symbol_nonprefix_matching = false },
         })
 
         vim.diagnostic.config({

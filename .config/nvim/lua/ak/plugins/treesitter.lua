@@ -1,6 +1,8 @@
 return {
-
     "nvim-treesitter/nvim-treesitter",
+    dependencies = {
+        "yioneko/nvim-yati", -- FIXME: check is it usefull
+    },
     config = function()
         require("nvim-treesitter.configs").setup({
             ensure_installed = {
@@ -23,7 +25,7 @@ return {
             },
 
             indent = {
-                enable = true,
+                enable = false,
             },
 
             -- enable autotagging (w/ nvim-ts-autotag plugin)
@@ -52,6 +54,18 @@ return {
                     scope_incremental = "gsi",
                     node_decremental = "gdn",
                 },
+            },
+            yati = {
+                enable = true,
+                -- Disable by languages, see `Supported languages`
+                -- disable = { "python" },
+                default_lazy = true,
+                -- Determine the fallback method used when we cannot calculate indent by tree-sitter
+                --   "auto": fallback to vim auto indent
+                --   "asis": use current indent as-is
+                --   "cindent": see `:h cindent()`
+                -- Or a custom function return the final indent result.
+                default_fallback = "auto",
             },
         })
     end,
