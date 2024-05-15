@@ -4,6 +4,12 @@ vim.g.mapleader = " "
 -- Press jk fast to enter
 vim.keymap.set("i", "jk", "<ESC>")
 
+vim.keymap.set("i", "jkl", function()
+    vim.cmd("write")
+    vim.cmd("normal l")
+    vim.cmd("stopinsert")
+end, { desc = "Write current file and exit insert mode" })
+
 -- Buffers --
 vim.keymap.set("n", "<leader>bd", ":bd<cr>")
 vim.keymap.set("n", "<leader>ba", ":bufdo bd<cr>")

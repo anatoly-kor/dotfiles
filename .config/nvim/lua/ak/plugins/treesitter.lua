@@ -1,7 +1,7 @@
 return {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
-        "yioneko/nvim-yati", -- FIXME: check is it usefull
+        "yioneko/nvim-yati", -- FIXME: check is it usefull indent
     },
     config = function()
         require("nvim-treesitter.configs").setup({
