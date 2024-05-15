@@ -34,12 +34,38 @@ return {
             return extensions.git_changes(window, buffer)
         end)
 
+        local hjkl_output = function()
+            local hp_list = require("harpoon.mark")
+            local total_marks = hp_list.get_length()
+            if total_marks == 0 then
+                return ""
+            end
+
+            local current_buf_index = hp_list.get_current_index()
+
+            local output = {}
+
+            for i, keymap in ipairs({ "h", "j", "k", "l" }) do
+                if i == current_buf_index then
+                    table.insert(output, "%#ElNormal#" .. string.upper(keymap))
+                else
+                    table.insert(output, "%#ElCommand#" .. string.lower(keymap))
+                end
+            end
+
+            return table.concat(output, "")
+        end
+
         local generator = function()
             local el_segments = {}
 
             table.insert(el_segments, mode)
 
             table.insert(el_segments, git_branch)
+
+            table.insert(el_segments, " ")
+
+            table.insert(el_segments, hjkl_output())
 
             table.insert(el_segments, sections.split)
 
