@@ -5,9 +5,11 @@ vim.g.mapleader = " "
 vim.keymap.set("i", "jk", "<ESC>")
 
 vim.keymap.set("i", "jkl", function()
-    vim.cmd("write")
-    vim.cmd("normal l")
-    vim.cmd("stopinsert")
+    vim.cmd([[
+        write
+        normal l
+        stopinsert
+    ]])
 end, { desc = "Write current file and exit insert mode" })
 
 -- Buffers --

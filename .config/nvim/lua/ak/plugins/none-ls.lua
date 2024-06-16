@@ -10,6 +10,7 @@ return {
             ensure_installed = {
                 "flake8",
                 "isort",
+                "autoflake",
                 "mypy",
             },
             automatic_installation = true,
@@ -64,6 +65,12 @@ return {
                         "--tc",
                     },
                 }),
+                -- formatting.autoflake.with({
+                --     extra_args = {
+                --         "--in-place",
+                --         -- "--remove-unused-variables"
+                --     },
+                -- }),
             },
             on_attach = function(client, bufnr)
                 if client.supports_method("textDocument/formatting") then

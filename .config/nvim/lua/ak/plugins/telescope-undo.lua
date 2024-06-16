@@ -29,10 +29,9 @@ return {
                     },
                 },
             },
-
         })
         telescope.load_extension("undo")
 
-        vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<CR>")
+        vim.keymap.set("n", "<leader>ud", "<cmd>Telescope undo<CR>", { desc = "Telescope [U]n[D]o" })
     end,
 }

@@ -63,13 +63,12 @@ return {
 
             table.insert(el_segments, git_branch)
 
-            table.insert(el_segments, " ")
-
-            table.insert(el_segments, subscribe.buf_autocmd("hjkl", "BufEnter", hjkl_output))
-
             table.insert(el_segments, sections.split)
 
+            table.insert(el_segments, subscribe.buf_autocmd("hjkl", "BufEnter", hjkl_output))
+            table.insert(el_segments, "  ")
             table.insert(el_segments, file_icon)
+            table.insert(el_segments, "  ")
 
             table.insert(el_segments, sections.maximum_width(builtin.file_relative, 0.60))
 

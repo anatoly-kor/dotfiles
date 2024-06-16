@@ -4,7 +4,7 @@ return {
     { "kyazdani42/nvim-web-devicons" },
 
     { "tpope/vim-commentary" },
-    { "tpope/vim-surround",            event = "VeryLazy" },
+    { "tpope/vim-surround", event = "VeryLazy" },
     { "editorconfig/editorconfig-vim", event = "VeryLazy" },
 
     {
@@ -20,7 +20,7 @@ return {
         event = "VeryLazy",
         config = function()
             require("symbols-outline").setup()
-            vim.keymap.set("n", "<leader>ol", "<cmd>SymbolsOutline<CR>")
+            vim.keymap.set("n", "<leader>ol", "<cmd>SymbolsOutline<CR>", { desc = "[O]pen Out[L]ine" })
         end,
     },
 }

@@ -7,7 +7,7 @@
 	st  = status
 	br  = branch
 	c   = checkout
-    delete-local-merged = "!git fetch && git branch --merged | egrep -v 'master' | xargs git branch -d"
+    delete-local-merged = "!git fetch && git branch --merged | egrep -v 'master|main' | xargs git branch -d"
 
 [push]
     default = current
@@ -15,5 +15,5 @@
 [credential]
 	helper = osxkeychain
 
-[commit]
-    template = ~/.gittemplate
+; [commit]
+;     template = ~/.gittemplate

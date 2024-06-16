@@ -3,12 +3,12 @@ return {
     dependencies = {
         {
             "nvim-telescope/telescope-fzf-native.nvim",
-            build = 'make',
+            build = "make",
             config = function()
                 require("telescope").load_extension("fzf")
             end,
         },
-        "nvim-lua/plenary.nvim"
+        "nvim-lua/plenary.nvim",
     },
     build = "make",
     config = function()
@@ -33,23 +33,23 @@ return {
         vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
         vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
         vim.keymap.set("n", "<leader>pws", function()
-            local word = vim.fn.expand('<cword>')
-            builtin.grep_string({search=word})
+            local word = vim.fn.expand("<cword>")
+            builtin.grep_string({ search = word })
         end)
         vim.keymap.set("n", "<leader>pWs", function()
-            local word = vim.fn.expand('<cWORD>')
-            builtin.grep_string({search=word})
+            local word = vim.fn.expand("<cWORD>")
+            builtin.grep_string({ search = word })
         end)
 
         local bufopts = { noremap = true, silent = true, buffer = 0 }
 
         vim.keymap.set("n", "gi", function()
             require("telescope.builtin").lsp_implementations()
-        end, bufopts)
+        end, { desc = "[G]o find [I]mplementations" })
 
         vim.keymap.set("n", "gr", function()
             require("telescope.builtin").lsp_references()
-        end, bufopts)
+        end, { desc = "[G]o find [R]eferences" })
 
         vim.keymap.set("n", "<leader>sn", function() -- FIXME: Is it usefull for me?
             builtin.find_files({ cwd = vim.fn.stdpath("config") })
@@ -72,8 +72,8 @@ return {
                 },
                 mappings = {
                     i = {
-                        ["<C-k>"] = actions.move_selection_previous,                       -- move to prev result
-                        ["<C-j>"] = actions.move_selection_next,                           -- move to next result
+                        ["<C-k>"] = actions.move_selection_previous, -- move to prev result
+                        ["<C-j>"] = actions.move_selection_next, -- move to next result
                         ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist, -- send selected to quickfixlist
                         ["<C-s>"] = actions.send_to_qflist + actions.open_qflist,
                     },

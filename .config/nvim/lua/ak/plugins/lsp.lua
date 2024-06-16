@@ -15,7 +15,7 @@ local on_attach = function(_, bufnr)
     end, opts)
     keymap.set("n", "<leader>r", function()
         vim.lsp.buf.references()
-    end, opts)
+    end, { desc = "Find [R]eferences" }, opts)
     keymap.set("n", "<leader>vrn", function()
         vim.lsp.buf.rename()
     end, { desc = "[V]isual [R]e[N]ame" }, opts)
@@ -96,7 +96,8 @@ return {
             vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
         end
 
-        local cmp_select = { behavior = cmp.SelectBehavior.Select }
+        local luasnip = require("luasnip")
+
         cmp.setup({
             completion = {
                 completeopt = "menu,menuone,preview,noselect",
@@ -107,15 +108,15 @@ return {
             },
             snippet = {
                 expand = function(args)
-                    require("luasnip").lsp_expand(args.body)
+                    luasnip.lsp_expand(args.body)
                 end,
             },
             mapping = cmp.mapping.preset.insert({
-                ["<S-Tab>"] = cmp.mapping.select_prev_item(cmp_select),
-                ["<Tab>"] = cmp.mapping.select_next_item(cmp_select),
+                ["<Tab>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+                ["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }), -- INFO: Select
                 ["<CR>"] = cmp.mapping.confirm({ select = true }),
-                ["<C-Space>"] = cmp.mapping.complete(),
-                ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+                ["<C-y>"] = cmp.mapping.complete(),
+                ["<C-d>"] = cmp.mapping.scroll_docs(-4),
                 ["<C-f>"] = cmp.mapping.scroll_docs(4),
                 ["<C-e>"] = cmp.mapping.abort(),
             }),
@@ -130,10 +131,10 @@ return {
             }, { name = "buffer" }),
             sorting = {
                 comparators = {
+                    cmp.config.compare.recently_used,
                     cmp.config.compare.offset,
                     cmp.config.compare.exact,
                     cmp.config.compare.score,
-                    cmp.config.compare.recently_used,
                     cmp.config.compare.locality,
                     cmp.config.compare.kind,
                     cmp.config.compare.length,
@@ -146,9 +147,16 @@ return {
             },
             formatting = {
                 format = require("lspkind").cmp_format({
-                    mode = "text", -- show only symbol annotations
+                    mode = "symbol_text",
                     maxwidth = 50,
                     ellipsis_char = "...",
+                    menu = {
+                        buffer = "[buf]",
+                        nvim_lsp = "[LSP]",
+                        nvim_lua = "[api]",
+                        path = "[path]",
+                        luasnip = "[snip]",
+                    },
                 }),
             },
         })

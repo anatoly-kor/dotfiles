@@ -1,24 +1,37 @@
 return {
-    "mfussenegger/nvim-dap-python",
+    "mfussenegger/nvim-dap",
     dependencies = {
-        "mfussenegger/nvim-dap",
         "jay-babu/mason-nvim-dap.nvim",
         "rcarriga/nvim-dap-ui",
-        "mfussenegger/nvim-dap",
         "nvim-neotest/nvim-nio",
         "theHamsta/nvim-dap-virtual-text",
     },
     event = "VeryLazy",
     config = function()
-        require("dap-python").setup("~/.local/share/nvim/mason/packages/debugpy/venv/bin/python")
         local dap, dapui = require("dap"), require("dapui")
+
         require("mason-nvim-dap").setup({
             ensure_installed = {
                 "python",
                 "debugpy",
             },
             automatic_installation = true,
-            handlers = {},
+            handlers = {
+                function(config)
+                    require("mason-nvim-dap").default_setup(config)
+                end,
+                python = function(config)
+                    config.adapters = {
+                        type = "executable",
+                        command = "python3",
+                        args = {
+                            "-m",
+                            "debugpy.adapter",
+                        },
+                    }
+                    require("mason-nvim-dap").default_setup(config)
+                end,
+            },
         })
 
         dapui.setup({
@@ -45,8 +58,9 @@ return {
                     elements = {
                         { id = "scopes", size = 0.4 },
                         { id = "breakpoints", size = 0.1 },
-                        { id = "stacks", size = 0.1 },
+                        -- { id = "stacks",      size = 0.1 },
                         { id = "watches", size = 0.4 },
+                        { id = "console", size = 0.1 },
                     },
                     position = "right",
                     size = 70,
@@ -55,15 +69,11 @@ return {
                     elements = {
                         {
                             id = "repl",
-                            size = 0.5,
-                        },
-                        {
-                            id = "console",
-                            size = 0.5,
+                            size = 1.0,
                         },
                     },
                     position = "bottom",
-                    size = 10,
+                    size = 20,
                 },
             },
             mappings = {
@@ -79,6 +89,7 @@ return {
                 max_value_lines = 100,
             },
         })
+
         dap.listeners.before.attach.dapui_config = function()
             dapui.open()
         end
@@ -91,6 +102,48 @@ return {
         dap.listeners.before.event_exited.dapui_config = function()
             dapui.close()
         end
+
+        dap.configurations.python = {
+            {
+                type = "python",
+                request = "launch",
+                name = "Launch file",
+                program = "${file}",
+                pythonPath = function()
+                    -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
+                    -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
+                    -- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
+                    local cwd = vim.fn.getcwd()
+                    if vim.fn.executable(cwd .. "/venv/bin/python") == 1 then
+                        return cwd .. "/venv/bin/python"
+                    elseif vim.fn.executable(cwd .. "/.venv/bin/python") == 1 then
+                        return cwd .. "/.venv/bin/python"
+                    else
+                        return "python3"
+                    end
+                end,
+            },
+            {
+                type = "python",
+                request = "launch",
+                name = "Django",
+                program = vim.loop.cwd() .. "/manage.py",
+                args = { "runserver", "--noreload" },
+                justMyCode = true,
+                django = true,
+                console = "integratedTerminal",
+            },
+            {
+                type = "python",
+                request = "launch",
+                name = "Pytest",
+                module = "pytest",
+                args = {
+                    "${file}",
+                },
+                console = "integratedTerminal",
+            },
+        }
 
         require("nvim-dap-virtual-text").setup({
             enabled = true, -- enable this plugin (the default)
@@ -122,11 +175,12 @@ return {
 
         vim.keymap.set("n", "<leader>db", ":DapToggleBreakpoint<CR>", { desc = "Add Debug [B]reakpoint" })
         vim.keymap.set("n", "<leader>dc", ":lua require('dap').continue()<CR>", { desc = "[D]ebug [C]ontinue" })
-        vim.keymap.set("n", "<leader>o", ":lua require('dap').step_over()<CR>", { desc = "Debug Step [O]ver" })
-        vim.keymap.set("n", "<leader>i", ":lua require('dap').step_into()<CR>", { desc = "Debug Step [I]nto" })
+        vim.keymap.set("n", "<leader>do", ":lua require('dap').step_over()<CR>", { desc = "Debug Step [O]ver" })
+        vim.keymap.set("n", "<leader>di", ":lua require('dap').step_into()<CR>", { desc = "Debug Step [I]nto" })
+        -- vim.keymap.set("n", "<leader>u", ":lua require('dap').step_out()<CR>", { desc = "Debug Step O[U]t" })
         vim.keymap.set("n", "<leader>dr", ":lua require('dap').restart()<CR>", { desc = "Debug [R]restart" })
         vim.keymap.set("n", "<leader>dt", ":lua require('dap').terminate()<CR>", { desc = "Debug Terminate Session" })
-        vim.keymap.set("n", "<leader>e", ":lua require('dapui').eval()<CR>", { desc = "Show [E]xpression under cursor." })
+        vim.keymap.set("n", "<leader>de", ":lua require('dapui').eval()<CR>", { desc = "Show [E]xpression under cursor." })
         vim.keymap.set(
             "n",
             "<leader>w",
