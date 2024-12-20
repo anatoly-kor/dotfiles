@@ -1,10 +1,13 @@
 return {
     "nvim-lua/plenary.nvim",
 
-    { "kyazdani42/nvim-web-devicons" },
+    {
+        "kyazdani42/nvim-web-devicons",
+        url = "https://github.com/nvim-tree/nvim-web-devicons.git",
+    },
 
     { "tpope/vim-commentary" },
-    { "tpope/vim-surround", event = "VeryLazy" },
+    { "tpope/vim-surround",            event = "VeryLazy" },
     { "editorconfig/editorconfig-vim", event = "VeryLazy" },
 
     {

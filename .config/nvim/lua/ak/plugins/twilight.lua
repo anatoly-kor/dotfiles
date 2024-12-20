@@ -1,0 +1,36 @@
+return {
+    "folke/twilight.nvim",
+    config = function()
+        local twilight = require("twilight")
+        twilight.setup({
+            dimming = {
+                alpha = 0.25,        -- amount of dimming
+                color = { "Normal", "#ffffff" },
+                term_bg = "#000000", -- if guibg=NONE, this will be used to calculate text color
+                inactive = false,    -- when true, other windows will be fully dimmed (unless they contain the same buffer)
+            },
+            context = 5,             -- amount of lines we will try to show around the current line
+            treesitter = true,       -- use treesitter when available for the filetype
+            -- treesitter is used to automatically expand the visible text,
+            -- but you can further control the types of nodes that should always be fully expanded
+            expand = { -- for treesitter, we we always try to expand to the top-most ancestor with these types
+                "function",
+                "method",
+                "table",
+                "if_statement",
+                "dict",
+                "function_definition",
+            },
+            exclude = {}, -- exclude these filetypes
+        })
+
+        vim.keymap.set("n", "<leader>tc", "<cmd>Twilight<CR>", { desc = "[H]ighlight current code block" })
+
+        -- vim.api.nvim_create_autocmd("BufEnter", {
+        --     pattern = "*",
+        --     callback = function()
+        --         vim.cmd(":TwilightEnable")
+        --     end,
+        -- })
+    end,
+}

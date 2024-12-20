@@ -2,6 +2,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
         "yioneko/nvim-yati", -- FIXME: check is it usefull indent
+        "nvim-treesitter/playground",
     },
     config = function()
         require("nvim-treesitter.configs").setup({
@@ -16,6 +17,7 @@ return {
                 "yaml",
                 "gitignore",
                 "python",
+                "java",
                 "markdown",
                 "markdown_inline",
                 "bash",
@@ -23,29 +25,23 @@ return {
                 "dockerfile",
                 "gitcommit",
             },
-
             indent = {
                 enable = false,
             },
-
             -- enable autotagging (w/ nvim-ts-autotag plugin)
             autotag = {
                 enable = false,
             },
-
             -- Install parsers synchronously (only applied to `ensure_installed`)
             sync_install = false,
-
             -- Automatically install missing parsers when entering buffer
             -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
             auto_install = true,
-
             highlight = {
                 -- `false` will disable the whole extension
                 enable = true,
                 additional_vim_regex_highlighting = { "markdown" },
             },
-
             incremental_selection = {
                 enable = true,
                 keymaps = {

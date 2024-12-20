@@ -4,13 +4,13 @@ vim.g.mapleader = " "
 -- Press jk fast to enter
 vim.keymap.set("i", "jk", "<ESC>")
 
-vim.keymap.set("i", "jkl", function()
-    vim.cmd([[
-        write
-        normal l
-        stopinsert
-    ]])
-end, { desc = "Write current file and exit insert mode" })
+-- vim.keymap.set("i", "jkl", function()
+--     vim.cmd([[
+--         write
+--         normal l
+--         stopinsert
+--     ]])
+-- end, { desc = "Write current file and exit insert mode" })
 
 -- Buffers --
 vim.keymap.set("n", "<leader>bd", ":bd<cr>")
@@ -25,7 +25,10 @@ vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("n", "gp", "`[v`]")
 
 -- vim.keymap.set("n", "J", "mzJ`z")
-vim.keymap.set("n", "J", ":lua require('treesj').toggle()<CR>")
+vim.keymap.set("n", "J", ":lua require('treesj').toggle()<CR>", { desc = "[J]oin/Split code block" })
+vim.keymap.set("n", "M", function()
+    require("treesj").toggle({ split = { recursive = true } })
+end, { desc = "[J]oin/split recursive code block" })
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")

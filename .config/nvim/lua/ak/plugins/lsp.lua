@@ -50,7 +50,7 @@ return {
         "onsails/lspkind.nvim",
     },
     config = function()
-        local cmp = require("cmp")
+        -- local cmp = require("cmp")
         local cmp_lsp = require("cmp_nvim_lsp")
         local capabilities = vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(),
             cmp_lsp.default_capabilities())
@@ -98,85 +98,85 @@ return {
 
         local luasnip = require("luasnip")
 
-        cmp.setup({
-            completion = {
-                completeopt = "menu,menuone,preview,noselect",
-            },
-            window = {
-                completion = cmp.config.window.bordered(),
-                documentation = cmp.config.window.bordered(),
-            },
-            snippet = {
-                expand = function(args)
-                    luasnip.lsp_expand(args.body)
-                end,
-            },
-            mapping = cmp.mapping.preset.insert({
-                ["<Tab>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-                ["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }), -- INFO: Select
-                ["<CR>"] = cmp.mapping.confirm({ select = true }),
-                ["<C-y>"] = cmp.mapping.complete(),
-                ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-                ["<C-f>"] = cmp.mapping.scroll_docs(4),
-                ["<C-e>"] = cmp.mapping.abort(),
-            }),
-            sources = cmp.config.sources({
-                { name = "nvim_lsp" },
-                -- { name = "luasnip" },
-                -- { name = "cmp_nvim_lsp" },
-                -- { name = "nvim-cmp" },
-                -- { name = "nvim_lua" },
-                { name = "path" },
-                { name = "pyright" },
-            }, { name = "buffer" }),
-            sorting = {
-                comparators = {
-                    cmp.config.compare.recently_used,
-                    cmp.config.compare.offset,
-                    cmp.config.compare.exact,
-                    cmp.config.compare.score,
-                    cmp.config.compare.locality,
-                    cmp.config.compare.kind,
-                    cmp.config.compare.length,
-                    cmp.config.compare.order,
-                },
-            },
-            confirm_opts = {
-                behavior = cmp.ConfirmBehavior.Replace,
-                select = true,
-            },
-            formatting = {
-                format = require("lspkind").cmp_format({
-                    mode = "symbol_text",
-                    maxwidth = 50,
-                    ellipsis_char = "...",
-                    menu = {
-                        buffer = "[buf]",
-                        nvim_lsp = "[LSP]",
-                        nvim_lua = "[api]",
-                        path = "[path]",
-                        luasnip = "[snip]",
-                    },
-                }),
-            },
-        })
+        --         cmp.setup({
+        --             completion = {
+        --                 completeopt = "menu,menuone,preview,noselect",
+        --             },
+        --             window = {
+        --                 completion = cmp.config.window.bordered(),
+        --                 documentation = cmp.config.window.bordered(),
+        --             },
+        --             snippet = {
+        --                 expand = function(args)
+        --                     luasnip.lsp_expand(args.body)
+        --                 end,
+        --             },
+        --             mapping = cmp.mapping.preset.insert({
+        --                 ["<Tab>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+        --                 ["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }), -- INFO: Select
+        --                 ["<CR>"] = cmp.mapping.confirm({ select = true }),
+        --                 ["<C-y>"] = cmp.mapping.complete(),
+        --                 ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+        --                 ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        --                 ["<C-e>"] = cmp.mapping.abort(),
+        --             }),
+        --             sources = cmp.config.sources({
+        --                 { name = "nvim_lsp" },
+        --                 -- { name = "luasnip" },
+        --                 -- { name = "cmp_nvim_lsp" },
+        --                 -- { name = "nvim-cmp" },
+        --                 -- { name = "nvim_lua" },
+        --                 { name = "path" },
+        --                 { name = "pyright" },
+        --             }, { name = "buffer" }),
+        --             sorting = {
+        --                 comparators = {
+        --                     cmp.config.compare.recently_used,
+        --                     cmp.config.compare.offset,
+        --                     cmp.config.compare.exact,
+        --                     cmp.config.compare.score,
+        --                     cmp.config.compare.locality,
+        --                     cmp.config.compare.kind,
+        --                     cmp.config.compare.length,
+        --                     cmp.config.compare.order,
+        --                 },
+        --             },
+        --             confirm_opts = {
+        --                 behavior = cmp.ConfirmBehavior.Replace,
+        --                 select = true,
+        --             },
+        --             formatting = {
+        --                 format = require("lspkind").cmp_format({
+        --                     mode = "symbol_text",
+        --                     maxwidth = 50,
+        --                     ellipsis_char = "...",
+        --                     menu = {
+        --                         buffer = "[buf]",
+        --                         nvim_lsp = "[LSP]",
+        --                         nvim_lua = "[api]",
+        --                         path = "[path]",
+        --                         luasnip = "[snip]",
+        --                     },
+        --                 }),
+        --             },
+        --         })
 
-        cmp.setup.cmdline({ "/", "?" }, {
-            mapping = cmp.mapping.preset.cmdline(),
-            sources = {
-                { name = "buffer" },
-            },
-        })
+        --         cmp.setup.cmdline({ "/", "?" }, {
+        --             mapping = cmp.mapping.preset.cmdline(),
+        --             sources = {
+        --                 { name = "buffer" },
+        --             },
+        --         })
 
-        cmp.setup.cmdline(":", {
-            mapping = cmp.mapping.preset.cmdline(),
-            sources = cmp.config.sources({
-                { name = "path" },
-            }, {
-                { name = "cmdline" },
-            }),
-            matching = { disallow_symbol_nonprefix_matching = false },
-        })
+        --         cmp.setup.cmdline(":", {
+        --             mapping = cmp.mapping.preset.cmdline(),
+        --             sources = cmp.config.sources({
+        --                 { name = "path" },
+        --             }, {
+        --                 { name = "cmdline" },
+        --             }),
+        --             matching = { disallow_symbol_nonprefix_matching = false },
+        --         })
 
         vim.diagnostic.config({
             virtual_text = false,

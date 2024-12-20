@@ -16,13 +16,13 @@ return {
 
             -- If line after join will be longer than max value,
             -- node will not be formatted
-            max_join_length = 1000,
+            max_join_length = 100000,
 
             -- hold|start|end:
             -- hold - cursor follows the node/place on which it was called
             -- start - cursor jumps to the first symbol of the node being formatted
             -- end - cursor jumps to the last symbol of the node being formatted
-            cursor_behavior = "start",
+            cursor_behavior = "hold",
 
             -- Notify about possible problems or not
             notify = true,
@@ -31,5 +31,5 @@ return {
             -- Use `dot` for repeat action
             dot_repeat = true,
         })
-    end
+    end,
 }

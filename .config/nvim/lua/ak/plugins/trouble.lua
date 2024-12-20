@@ -27,7 +27,7 @@ return {
             require("trouble").prev({ skip_groups = true, jump = true })
         end, { desc = "Jump to prev (Trouble)" })
 
-        vim.keymap.set("n", "<leader>ll", function()
+        vim.keymap.set("n", "<leader>tp", function()
             require("trouble").toggle({
                 mode = "lsp",
                 focus = false,
