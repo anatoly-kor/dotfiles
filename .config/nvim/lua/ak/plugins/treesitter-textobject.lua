@@ -10,7 +10,7 @@ return {
                     enable = true,
                     set_jumps = true,
                     goto_next_start = {
-                        ["))"] = "@function.outer",
+                        [")"] = "@function.outer",
                         ["]]"] = { query = "@class.outer", desc = "Next class start" },
                     },
                     -- goto_next_end = {
@@ -18,7 +18,7 @@ return {
                     --     ["]["] = "@class.outer",
                     -- },
                     goto_previous_start = {
-                        ["(("] = "@function.outer",
+                        ["("] = "@function.outer",
                         ["[["] = "@class.outer",
                     },
                     -- goto_previous_end = {

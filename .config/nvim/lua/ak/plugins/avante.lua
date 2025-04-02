@@ -80,32 +80,36 @@ return {
     config = function()
         require("avante").setup({
             provider = "ollama",
-            vendors = {
-                ollama = {
-                    api_key_name = "",
-                    -- ["local"] = true,
-                    endpoint = "127.0.0.1:11434/v1",
-                    model = "qwen2.5-coder:3b",
-                    parse_curl_args = function(opts, code_opts)
-                        return {
-                            url = opts.endpoint .. "/chat/completions",
-                            headers = {
-                                ["Accept"] = "application/json",
-                                ["Content-Type"] = "application/json",
-                            },
-                            body = {
-                                model = opts.model,
-                                messages = require("avante.providers").copilot.parse_messages(code_opts),
-                                max_tokens = 4096,
-                                stream = true,
-                            },
-                        }
-                    end,
-                    parse_response_data = function(data_stream, event_state, opts)
-                        require("avante.providers").openai.parse_response(data_stream, event_state, opts)
-                    end,
-                },
+            ollama = {
+                endpoint = "http://127.0.0.1:11434",
+                model = "qwen2.5-coder:3b",
             },
+            -- vendors = {
+            --     ollama = {
+            --         api_key_name = "",
+            --         -- ["local"] = true,
+            --         endpoint = "127.0.0.1:11434/v1",
+            --         model = "qwen2.5-coder:3b",
+            --         parse_curl_args = function(opts, code_opts)
+            --             return {
+            --                 url = opts.endpoint .. "/chat/completions",
+            --                 headers = {
+            --                     ["Accept"] = "application/json",
+            --                     ["Content-Type"] = "application/json",
+            --                 },
+            --                 body = {
+            --                     model = opts.model,
+            --                     messages = require("avante.providers").copilot.parse_messages(code_opts),
+            --                     max_tokens = 4096,
+            --                     stream = true,
+            --                 },
+            --             }
+            --         end,
+            --         parse_response_data = function(data_stream, event_state, opts)
+            --             require("avante.providers").openai.parse_response(data_stream, event_state, opts)
+            --         end,
+            --     },
+            -- },
             behaviour = {
                 auto_suggestions = false, -- Experimental stage
                 auto_set_highlight_group = true,
@@ -141,9 +145,9 @@ return {
             hints = { enabled = true },
             windows = {
                 ---@type "right" | "left" | "top" | "bottom"
-                position = "right",   -- the position of the sidebar
-                wrap = true,          -- similar to vim.o.wrap
-                width = 30,           -- default % based on available width
+                position = "right", -- the position of the sidebar
+                wrap = true, -- similar to vim.o.wrap
+                width = 30, -- default % based on available width
                 sidebar_header = {
                     align = "center", -- left, center, right for title
                     rounded = true,

@@ -3,10 +3,7 @@ return {
     dependencies = {
         {
             "nvim-telescope/telescope-fzf-native.nvim",
-            build = "make",
-            config = function()
-                require("telescope").load_extension("fzf")
-            end,
+            build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
         },
         "nvim-lua/plenary.nvim",
     },
@@ -99,6 +96,7 @@ return {
             },
         })
 
+        telescope.load_extension("fzf")
         telescope.load_extension("noice")
     end,
 }

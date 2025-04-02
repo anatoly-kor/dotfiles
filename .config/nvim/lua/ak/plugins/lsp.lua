@@ -40,29 +40,29 @@ return {
         "williamboman/mason-lspconfig.nvim",
         -- "jayp0521/mason-null-ls.nvim",
         "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
-        "hrsh7th/cmp-cmdline",
-        "hrsh7th/nvim-cmp",
-        "L3MON4D3/LuaSnip",
-        "saadparwaiz1/cmp_luasnip",
+        "python-lsp/pylsp-mypy",
+        -- "hrsh7th/cmp-buffer",
+        -- "hrsh7th/cmp-path",
+        -- "hrsh7th/cmp-cmdline",
+        -- "hrsh7th/nvim-cmp",
+        -- "L3MON4D3/LuaSnip",
+        -- "saadparwaiz1/cmp_luasnip",
         "j-hui/fidget.nvim",
-        "onsails/lspkind.nvim",
+        -- "onsails/lspkind.nvim",
     },
     config = function()
-        -- local cmp = require("cmp")
         local cmp_lsp = require("cmp_nvim_lsp")
-        local capabilities = vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(),
-            cmp_lsp.default_capabilities())
+        local capabilities = vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), cmp_lsp.default_capabilities())
 
         require("fidget").setup({})
-        require("luasnip/loaders/from_vscode").lazy_load()
         require("mason").setup()
         require("mason-lspconfig").setup({
             ensure_installed = {
                 "lua_ls",
                 "pyright",
+                "pylsp",
                 "bashls",
+                "ruff",
             },
 
             handlers = {
@@ -75,6 +75,7 @@ return {
 
                 ["lua_ls"] = function()
                     local lspconfig = require("lspconfig")
+
                     lspconfig.lua_ls.setup({
                         capabilities = capabilities,
                         on_attach = on_attach,
@@ -82,6 +83,99 @@ return {
                             Lua = {
                                 diagnostics = {
                                     globals = { "vim", "it", "describe", "before_each", "after_each" },
+                                },
+                            },
+                        },
+                    })
+                end,
+
+                ["pylsp"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.pylsp.setup({
+                        capabilities = capabilities,
+                        on_attach = on_attach,
+                        settings = {
+                            pylsp = {
+                                plugins = {
+                                    -- configurationSources = { "flake8" },
+                                    configurationSources = { "ruff" },
+                                    flake8 = { enabled = false },
+
+                                    autopep8 = { enabled = false },
+                                    mccabe = { enabled = false },
+                                    preload = { enabled = false },
+                                    pycodestyle = { enabled = false },
+                                    pydocstyle = { enabled = false },
+                                    pyflakes = { enabled = false },
+                                    pylint = { enabled = false },
+                                    yapf = { enabled = false },
+                                    rope_auto_import = { enabled = false, memory = false },
+                                    rope_completion = { enabled = false, eager = false },
+                                    pylsp_mypy = {
+                                        live_mode = true,
+                                        report_progress = true,
+                                        dmypy = true,
+                                    },
+
+                                    isort = { enabled = false },
+                                    black = { enabled = false, cache_config = false },
+                                    ruff = { enabled = true },
+
+                                    jedi_hover = { enabled = false },
+                                    jedi_signature_help = { enabled = false },
+                                    jedi_references = { enabled = false },
+                                    jedi_symbols = { enabled = false },
+                                    jedi_definition = {
+                                        enabled = false,
+                                        follow_imports = false,
+                                        follow_builtin_imports = false,
+                                        follow_builtin_definitions = false,
+                                    },
+                                    jedi_completion = {
+                                        enabled = false,
+                                        include_params = false,
+                                        include_class_objects = false,
+                                        include_function_objects = false,
+                                        fuzzy = false,
+                                        eager = false,
+                                        cache_for = {
+                                            "pandas",
+                                            "numpy",
+                                            "tensorflow",
+                                            "matplotlib",
+                                            "pydantic",
+                                            "fastapi",
+                                            "flask",
+                                            "sqlalchemy",
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    })
+                end,
+
+                ["ruff"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.ruff.setup({
+                        capabilities = capabilities,
+                        on_attach = on_attach,
+                    })
+                end,
+
+                ["pyright"] = function()
+                    local lspconfig = require("lspconfig")
+
+                    lspconfig.pyright.setup({
+                        capabilities = capabilities,
+                        on_attach = on_attach,
+                        settings = {
+                            pyright = {
+                                disableOrganizeImports = true,
+                            },
+                            python = {
+                                analysis = {
+                                    ignore = { "*" }, --COMMENT: Игнорим все ошибки от pyright, посмотрим насколько реально так жить
                                 },
                             },
                         },
@@ -96,91 +190,9 @@ return {
             vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
         end
 
-        local luasnip = require("luasnip")
-
-        --         cmp.setup({
-        --             completion = {
-        --                 completeopt = "menu,menuone,preview,noselect",
-        --             },
-        --             window = {
-        --                 completion = cmp.config.window.bordered(),
-        --                 documentation = cmp.config.window.bordered(),
-        --             },
-        --             snippet = {
-        --                 expand = function(args)
-        --                     luasnip.lsp_expand(args.body)
-        --                 end,
-        --             },
-        --             mapping = cmp.mapping.preset.insert({
-        --                 ["<Tab>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-        --                 ["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }), -- INFO: Select
-        --                 ["<CR>"] = cmp.mapping.confirm({ select = true }),
-        --                 ["<C-y>"] = cmp.mapping.complete(),
-        --                 ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-        --                 ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        --                 ["<C-e>"] = cmp.mapping.abort(),
-        --             }),
-        --             sources = cmp.config.sources({
-        --                 { name = "nvim_lsp" },
-        --                 -- { name = "luasnip" },
-        --                 -- { name = "cmp_nvim_lsp" },
-        --                 -- { name = "nvim-cmp" },
-        --                 -- { name = "nvim_lua" },
-        --                 { name = "path" },
-        --                 { name = "pyright" },
-        --             }, { name = "buffer" }),
-        --             sorting = {
-        --                 comparators = {
-        --                     cmp.config.compare.recently_used,
-        --                     cmp.config.compare.offset,
-        --                     cmp.config.compare.exact,
-        --                     cmp.config.compare.score,
-        --                     cmp.config.compare.locality,
-        --                     cmp.config.compare.kind,
-        --                     cmp.config.compare.length,
-        --                     cmp.config.compare.order,
-        --                 },
-        --             },
-        --             confirm_opts = {
-        --                 behavior = cmp.ConfirmBehavior.Replace,
-        --                 select = true,
-        --             },
-        --             formatting = {
-        --                 format = require("lspkind").cmp_format({
-        --                     mode = "symbol_text",
-        --                     maxwidth = 50,
-        --                     ellipsis_char = "...",
-        --                     menu = {
-        --                         buffer = "[buf]",
-        --                         nvim_lsp = "[LSP]",
-        --                         nvim_lua = "[api]",
-        --                         path = "[path]",
-        --                         luasnip = "[snip]",
-        --                     },
-        --                 }),
-        --             },
-        --         })
-
-        --         cmp.setup.cmdline({ "/", "?" }, {
-        --             mapping = cmp.mapping.preset.cmdline(),
-        --             sources = {
-        --                 { name = "buffer" },
-        --             },
-        --         })
-
-        --         cmp.setup.cmdline(":", {
-        --             mapping = cmp.mapping.preset.cmdline(),
-        --             sources = cmp.config.sources({
-        --                 { name = "path" },
-        --             }, {
-        --                 { name = "cmdline" },
-        --             }),
-        --             matching = { disallow_symbol_nonprefix_matching = false },
-        --         })
-
         vim.diagnostic.config({
             virtual_text = false,
-            underline = true,
+            underline = false,
             update_in_insert = true,
             severity_sort = false,
             float = {

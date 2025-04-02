@@ -43,25 +43,24 @@ return {
                 additional_vim_regex_highlighting = { "markdown" },
             },
             incremental_selection = {
-                enable = true,
+                enable = false,
                 keymaps = {
-                    init_selection = "gis",
-                    node_incremental = "gin",
-                    scope_incremental = "gsi",
-                    node_decremental = "gdn",
+                    init_selection = "si",
+                    node_incremental = "ni",
+                    scope_incremental = "sii",
+                    node_decremental = "nd",
                 },
             },
             yati = {
                 enable = true,
                 -- Disable by languages, see `Supported languages`
-                -- disable = { "python" },
                 default_lazy = true,
                 -- Determine the fallback method used when we cannot calculate indent by tree-sitter
                 --   "auto": fallback to vim auto indent
                 --   "asis": use current indent as-is
                 --   "cindent": see `:h cindent()`
                 -- Or a custom function return the final indent result.
-                default_fallback = "auto",
+                default_fallback = "asis",
             },
         })
     end,

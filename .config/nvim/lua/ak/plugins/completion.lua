@@ -1,8 +1,10 @@
 return {
     {
         "saghen/blink.cmp",
-        dependencies = "rafamadriz/friendly-snippets",
-
+        dependencies = {
+            "rafamadriz/friendly-snippets",
+            "hrsh7th/nvim-cmp",
+        },
         version = "v0.*",
         opts = {
             keymap = {
@@ -26,14 +28,25 @@ return {
                     "snippet_forward",
                     "fallback",
                 },
-
                 ["<C-l>"] = { "show", "show_documentation", "hide_documentation" },
+            },
+            cmdline = {
+                keymap = {
+                    ["<Tab>"] = { "select_next", "fallback" },
+                    ["<S-Tab>"] = { "select_prev", "fallback" },
+                    ["<C-y>"] = { "accept", "fallback" },
+                    ["<C-l>"] = { "show", "show_documentation", "hide_documentation" },
+                },
             },
 
             completion = {
                 documentation = {
                     auto_show = true,
                     auto_show_delay_ms = 0,
+                },
+                accept = { auto_brackets = { enabled = true } },
+                menu = {
+                    auto_show = true,
                 },
             },
 
