@@ -6,6 +6,7 @@ return {
             build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
         },
         "nvim-lua/plenary.nvim",
+        "debugloop/telescope-undo.nvim",
     },
     build = "make",
     config = function()
@@ -48,9 +49,7 @@ return {
             require("telescope.builtin").lsp_references()
         end, { desc = "[G]o find [R]eferences" })
 
-        vim.keymap.set("n", "<leader>sn", function() -- FIXME: Is it usefull for me?
-            builtin.find_files({ cwd = vim.fn.stdpath("config") })
-        end, { desc = "[S]earch [N]eovim files" })
+        vim.keymap.set("n", "<leader>ud", "<cmd>Telescope undo<cr>", { desc = "Telescope [U]n[D]o" })
 
         telescope.setup({
             extensions = {
@@ -59,6 +58,23 @@ return {
                     override_generic_sorter = true,
                     override_file_sorter = true,
                     case_mode = "smart_case",
+                },
+                undo = {
+                    use_delta = true,
+                    side_by_side = false,
+                    layout_strategy = "horizontal",
+                    mappings = {
+                        i = {
+                            ["<cr>"] = require("telescope-undo.actions").yank_additions,
+                            ["<C-y>"] = require("telescope-undo.actions").yank_deletions,
+                            ["<C-r>"] = require("telescope-undo.actions").restore,
+                        },
+                        n = {
+                            ["y"] = require("telescope-undo.actions").yank_additions,
+                            ["Y"] = require("telescope-undo.actions").yank_deletions,
+                            ["u"] = require("telescope-undo.actions").restore,
+                        },
+                    },
                 },
             },
             defaults = {
@@ -69,8 +85,8 @@ return {
                 },
                 mappings = {
                     i = {
-                        ["<C-k>"] = actions.move_selection_previous, -- move to prev result
-                        ["<C-j>"] = actions.move_selection_next, -- move to next result
+                        -- ["<C-k>"] = actions.move_selection_previous,                       -- move to prev result
+                        -- ["<C-j>"] = actions.move_selection_next,                           -- move to next result
                         ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist, -- send selected to quickfixlist
                         ["<C-s>"] = actions.send_to_qflist + actions.open_qflist,
                     },
@@ -96,6 +112,7 @@ return {
             },
         })
 
+        telescope.load_extension("undo")
         telescope.load_extension("fzf")
         telescope.load_extension("noice")
     end,
