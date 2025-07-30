@@ -15,7 +15,6 @@ return {
             ensure_installed = {
                 "python",
                 "debugpy",
-                "javadbg",
             },
             automatic_installation = true,
             handlers = {
@@ -31,14 +30,6 @@ return {
                             "-m",
                             "debugpy.adapter",
                         },
-                    }
-                    require("mason-nvim-dap").default_setup(config)
-                end,
-                javadbg = function(config)
-                    config.adapters = {
-                        type = "server",
-                        host = "127.0.0.1",
-                        port = 5001,
                     }
                     require("mason-nvim-dap").default_setup(config)
                 end,
@@ -74,7 +65,7 @@ return {
                         { id = "console",     size = 0.1 },
                     },
                     position = "right",
-                    size = 70,
+                    size = 80,
                 },
                 {
                     elements = {
@@ -150,15 +141,6 @@ return {
                     console = "integratedTerminal",
                 },
             },
-            java = {
-                {
-                    type = "javadbg",
-                    request = "attach",
-                    name = "Debug (Attach) - Remote",
-                    hostName = "127.0.0.1",
-                    port = 5005,
-                },
-            },
         }
 
         require("nvim-dap-virtual-text").setup({
@@ -206,11 +188,10 @@ return {
         -- vim.keymap.set("n", "<leader>u", ":lua require('dap').step_out()<CR>", { desc = "Debug Step O[U]t" })
         vim.keymap.set("n", "<leader>dr", ":lua require('dap').restart()<CR>", { desc = "Debug [R]restart" })
         vim.keymap.set("n", "<leader>dt", ":lua require('dap').terminate()<CR>", { desc = "Debug Terminate Session" })
-        vim.keymap.set("n", "<leader>de", ":lua require('dapui').eval()<CR>",
-            { desc = "Show [E]xpression under cursor." })
+        vim.keymap.set("n", "<leader>de", ":lua require('dapui').eval()<CR>", { desc = "Show [E]xpression under cursor." })
         vim.keymap.set(
             "n",
-            "<leader>w",
+            "<leader>dw",
             ":lua require('dapui').elements.watches.add()<CR>",
             { desc = "Add element under cursor to [W]atch list." }
         )

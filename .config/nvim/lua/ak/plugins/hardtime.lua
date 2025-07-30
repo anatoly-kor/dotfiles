@@ -1,10 +1,29 @@
-return {
-    "m4xshen/hardtime.nvim",
-    dependencies = { "MunifTanjim/nui.nvim" },
-    opts = {},
-    config = function()
-        require("hardtime").setup({
-            disabled_filetypes = { "oil", "lazy", "mason", "harpoon", "git", "fugitive", "dockerfile", "yaml", "trouble", "help" },
-        })
-    end,
-}
+return {}
+-- return {
+--     "m4xshen/hardtime.nvim",
+--     dependencies = { "MunifTanjim/nui.nvim" },
+--     opts = {},
+--     config = function()
+--         require("hardtime").setup({
+--             disabled_filetypes = {
+--                 "oil",
+--                 "lazy",
+--                 "mason",
+--                 "harpoon",
+--                 "git",
+--                 "fugitive",
+--                 "dockerfile",
+--                 "yaml",
+--                 "trouble",
+--                 "help",
+--                 "qf",
+--                 "dap-repl",
+--                 "dapui_scopes",
+--                 "dapui_breakpoints",
+--                 "dapui_stacks",
+--                 "dapui_watches",
+--                 "dapui_console",
+--             },
+--         })
+--     end,
+-- }

@@ -9,9 +9,14 @@ return {
             },
             formatters_by_ft = {
                 lua = { "stylua" },
-                python = { "isort" },
+                python = { "isort", "ruff_fix" },
             },
             formatters = {
+                ruff_fix = {
+                    command = "ruff",
+                    args = { "check", "--select", "F401", "--fix", "--stdin-filename", "$FILENAME", "-" },
+                    stdin = true,
+                },
                 isort = {
                     command = "isort",
                     args = {

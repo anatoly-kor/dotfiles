@@ -5,66 +5,52 @@ return {
         priority = 1000,
         config = function()
             require("tokyonight").setup({
-                -- ваша конфигурация
-                style = "night", -- Стили: `storm`, `moon`, `night` (темнее) и `day` (светлый)
-                transparent = true, -- Включение прозрачности фона
-                terminal_colors = true, -- Настройка цветов для `:terminal`
+                style = "night",
+                transparent = false,
+                terminal_colors = true,
                 styles = {
-                    -- Стили для разных групп синтаксиса
                     comments = { italic = true },
                     keywords = { italic = true },
                     functions = { bold = false },
                     variables = {},
-                    -- Стили фона. Могут быть "dark", "transparent" или "normal"
-                    sidebars = "transparent", -- стиль для боковых панелей
-                    floats = "transparent", -- стиль для плавающих окон
+                    sidebars = "transparent",
+                    floats = "transparent",
                 },
-                sidebars = { "qf", "help", "terminal", "packer", "NvimTree", "Trouble", "lazy" }, -- Какие окна считаются боковыми
-                dim_inactive = false, -- Затемнение неактивных окон
-                lualine_bold = true, -- Жирные заголовки секций в lualine
+                sidebars = { "qf", "help", "terminal", "packer", "NvimTree", "Trouble", "lazy" },
+                dim_inactive = false,
+                lualine_bold = true,
 
-                -- Переопределение цветов
                 on_colors = function(colors)
-                    colors.hint = colors.orange -- Изменение цвета подсказок на оранжевый
-                    colors.error = "#ff0000" -- Ярко-красный цвет для ошибок
-                    
-                    -- Дополнительные настройки цветов
+                    colors.hint = colors.orange
+                    colors.error = "#ff0000"
+
                     colors.border = "#1A1B26"
                     colors.bg_visual = colors.blue7
-                    
-                    -- Усиление контраста для темного режима
+
                     colors.bg_dark = "#16161e"
                     colors.bg = "#1a1b26"
                     colors.bg_highlight = "#292e42"
                     colors.fg_dark = "#c0caf5"
                     colors.comment = "#565f89"
-                    
-                    -- Улучшение цветов для лучшей читаемости
+
                     colors.blue = "#7aa2f7"
                     colors.cyan = "#7dcfff"
                     colors.green = "#9ece6a"
                     colors.magenta = "#bb9af7"
                 end,
 
-                -- Переопределение групп подсветки
                 on_highlights = function(highlights, colors)
-                    -- Изменение подсветки номеров строк
                     highlights.LineNr = { fg = "#565f89", bold = false }
                     highlights.CursorLineNr = { fg = colors.blue, bold = true }
-                    
-                    -- Подсветка выделения
+
                     highlights.Visual = { bg = colors.bg_visual, bold = false }
-                    
-                    -- Улучшение подсветки вертикальной линии
+
                     highlights.ColorColumn = { bg = "#1E2030" }
-                    
-                    -- Подсветка поиска
+
                     highlights.Search = { bg = "#3D59A1", fg = "#ffffff" }
-                    
-                    -- Границы окон
+
                     highlights.WinSeparator = { fg = colors.border }
-                    
-                    -- Telescope настройки
+
                     local prompt = "#2d3149"
                     highlights.TelescopeNormal = {
                         bg = colors.bg_dark,
@@ -96,36 +82,30 @@ return {
                         fg = colors.blue,
                         bold = true,
                     }
-                    
-                    -- Настройки для LSP и Diagnostics
+
                     highlights.DiagnosticVirtualTextError = { fg = colors.error, bg = "#332222" }
                     highlights.DiagnosticVirtualTextWarn = { fg = colors.warning, bg = "#33322e" }
                     highlights.DiagnosticVirtualTextInfo = { fg = colors.info, bg = "#243347" }
                     highlights.DiagnosticVirtualTextHint = { fg = colors.hint, bg = "#2a3045" }
-                    
-                    -- Настройки для Git Signs
+
                     highlights.GitSignsAdd = { fg = colors.green }
                     highlights.GitSignsChange = { fg = colors.blue }
                     highlights.GitSignsDelete = { fg = colors.red }
-                    
-                    -- Настройки для Treesitter
+
                     highlights["@keyword.return"] = { fg = colors.red, italic = true }
                     highlights["@string"] = { fg = colors.green }
                     highlights["@function"] = { fg = colors.blue, bold = false }
                     highlights["@variable.builtin"] = { fg = colors.magenta, italic = true }
                     highlights["@property"] = { fg = colors.cyan }
-                    
-                    -- Настройки для Trouble плагина
+
                     highlights.TroubleNormal = { bg = colors.bg_dark }
-                    
-                    -- Настройки для NeoTree
+
                     highlights.NeoTreeNormal = { bg = colors.bg_dark }
                     highlights.NeoTreeNormalNC = { bg = colors.bg_dark }
                 end,
-                
-                -- Указание какие плагины поддерживаются
+
                 plugins = {
-                    all = true, -- Включить поддержку всех плагинов
+                    all = true,
                     telescope = true,
                     treesitter = true,
                     nvim_cmp = true,
@@ -152,8 +132,7 @@ return {
                     },
                 },
             })
-            -- Активация цветовой схемы
-            vim.cmd.colorscheme("tokyonight")
+            -- vim.cmd.colorscheme("tokyonight")
         end,
     },
     {
@@ -182,12 +161,16 @@ return {
             vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#D70040", bold = true })
 
             vim.api.nvim_set_hl(0, "Visual", { bg = "#D70040", bold = false })
+            -- vim.cmd.colorscheme("monoglow")
         end,
     },
     {
         "rose-pine/neovim",
         lazy = false,
         priority = 1000,
+        config = function()
+            -- vim.cmd.colorscheme("rose-pine")
+        end,
     },
     {
         "AlexvZyl/nordic.nvim",
@@ -198,7 +181,9 @@ return {
         "Yazeed1s/oh-lucy.nvim",
         lazy = false,
         priority = 1000,
-        config = function() end,
+        config = function()
+            -- vim.cmd.colorscheme("oh-lucy-evening")
+        end,
     },
     {
         "navarasu/onedark.nvim",
@@ -241,4 +226,12 @@ return {
             -- vim.cmd.colorscheme("oxocarbon")
         end,
     },
+    {
+        'RostislavArts/naysayer.nvim',
+        priority = 1000,
+        lazy = false,
+        config = function()
+            vim.cmd.colorscheme('naysayer')
+        end,
+    }
 }

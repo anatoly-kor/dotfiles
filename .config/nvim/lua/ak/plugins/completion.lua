@@ -55,7 +55,14 @@ return {
                 nerd_font_variant = "mono",
             },
             sources = {
-                default = { "lsp", "path", "snippets", "buffer" },
+                default = { "lsp", "path", "buffer", "snippets" },
+                per_filetype = {
+                    sql = { 'dadbod' },
+                    lua = { inherit_defaults = true, 'lazydev' }
+                },
+                providers = {
+                    dadbod = { module = "vim_dadbod_completion.blink" },
+                }
             },
 
             signature = { enabled = true },

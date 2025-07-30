@@ -13,7 +13,7 @@ return {
         })
 
         vim.api.nvim_set_keymap("n", "<leader>rt", ":FlowLauncher<CR>", {})
-        vim.api.nvim_set_keymap("n", "<leader>rl", ":FlowRunLastCmd<CR>", {})
+        -- vim.api.nvim_set_keymap("n", "<leader>rl", ":FlowRunLastCmd<CR>", {})
         vim.api.nvim_set_keymap("n", "<leader>rp", ":FlowLastOutput<CR>", {})
     end,
 }
