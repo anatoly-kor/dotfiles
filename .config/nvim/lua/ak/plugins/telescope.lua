@@ -27,9 +27,9 @@ return {
         -- vim.keymap.set("n", "<leader>bc", builtin.git_bcommits, {})
         vim.keymap.set("n", "<leader>gb", builtin.git_branches, { desc = "Telescope [G]it [B]ranches" })
         vim.keymap.set("n", "<C-g>", builtin.live_grep, { desc = "Telescope Live [G]rep" })
-        vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
-        vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
-        vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
+        vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "Telescope [S]earch [H]elp" })
+        vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "Telescope [S]earch [K]eymaps" })
+        vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = 'Telescope [S]earch Recent Files ("." for repeat)' })
         vim.keymap.set("n", "<leader>pws", function()
             local word = vim.fn.expand("<cword>")
             builtin.grep_string({ search = word })
@@ -43,11 +43,11 @@ return {
 
         vim.keymap.set("n", "gi", function()
             require("telescope.builtin").lsp_implementations()
-        end, { desc = "[G]o find [I]mplementations" })
+        end, { desc = "Telescope [G]o find [I]mplementations" })
 
         vim.keymap.set("n", "gr", function()
             require("telescope.builtin").lsp_references()
-        end, { desc = "[G]o find [R]eferences" })
+        end, { desc = "Telescope [G]o find [R]eferences" })
 
         vim.keymap.set("n", "<leader>ud", "<cmd>Telescope undo<cr>", { desc = "Telescope [U]n[D]o" })
 
