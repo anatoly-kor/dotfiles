@@ -3,9 +3,8 @@ return {
     event = "VeryLazy",
     config = function()
         require("goto-preview").setup({
-            width = 125, -- Width of the floating window
-            height = 30, -- Height of the floating window
-            -- border = { "↖", "─", "┐", "│", "┘", "─", "└", "│" }, -- Border characters of the floating window
+            width = 125,               -- Width of the floating window
+            height = 30,               -- Height of the floating window
             border = { "┏", "━", "┓", "┃", "┛", "━", "┗", "┃" },
             default_mappings = false,  -- Bind default mappings
             debug = false,             -- Print debug information
@@ -23,6 +22,7 @@ return {
             bufhidden = "wipe",                                          -- the bufhidden option to set on the floating window. See :h bufhidden
             stack_floating_preview_windows = true,                       -- Whether to nest floating windows
             preview_window_title = { enable = true, position = "left" }, -- Whether to set the preview window title as the filename
+            zindex = 1,
         })
 
         vim.keymap.set("n", "gd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>")
