@@ -89,7 +89,7 @@ return {
                             rope_auto_import = { enabled = false, memory = false },
                             rope_completion = { enabled = false, eager = false },
                             pylsp_mypy = {
-                                enabled = true, -- Ensure mypy plugin is enabled
+                                enabled = true,
                                 live_mode = true,
                                 report_progress = true,
                                 dmypy = true,
@@ -132,11 +132,15 @@ return {
             pyright = {
                 settings = {
                     pyright = {
-                        disableOrganizeImports = true,
+                        disableOrganizeImports = false,
                     },
                     python = {
                         analysis = {
-                            ignore = { "*" },
+                            -- ignore = { "*" },
+                            autoSearchPaths = true,
+                            diagnosticMode = 'workspace',
+                            useLibraryCodeForTypes = true,
+                            typeCheckingMode = 'off'
                         },
                     },
                 },
