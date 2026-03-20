@@ -7,7 +7,7 @@ return {
     },
 
     { "tpope/vim-commentary" },
-    { "tpope/vim-surround", event = "VeryLazy" },
+    { "tpope/vim-surround",            event = "VeryLazy" },
     { "editorconfig/editorconfig-vim", event = "VeryLazy" },
 
     {
@@ -18,12 +18,12 @@ return {
             require("mini.cursorword").setup()
         end,
     },
-    -- {
-    --     "simrat39/symbols-outline.nvim",
-    --     event = "VeryLazy",
-    --     config = function()
-    --         require("symbols-outline").setup()
-    --         vim.keymap.set("n", "<leader>ol", "<cmd>SymbolsOutline<CR>", { desc = "[O]pen Out[L]ine" })
-    --     end,
-    -- },
+    {
+        "simrat39/symbols-outline.nvim",
+        event = "VeryLazy",
+        config = function()
+            require("symbols-outline").setup()
+            vim.keymap.set("n", "<leader>ol", "<cmd>SymbolsOutline<CR>", { desc = "[O]pen Out[L]ine" })
+        end,
+    },
 }

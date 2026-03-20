@@ -138,7 +138,7 @@ return {
                         analysis = {
                             -- ignore = { "*" },
                             autoSearchPaths = true,
-                            diagnosticMode = 'workspace',
+                            diagnosticMode = 'openFilesOnly', -- workspace
                             useLibraryCodeForTypes = true,
                             typeCheckingMode = 'off'
                         },

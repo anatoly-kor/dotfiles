@@ -182,7 +182,7 @@ return {
         lazy = false,
         priority = 1000,
         config = function()
-            -- vim.cmd.colorscheme("oh-lucy-evening")
+            vim.cmd.colorscheme("oh-lucy-evening")
         end,
     },
     {
@@ -208,13 +208,13 @@ return {
         lazy = false,
         priority = 1000,
         config = function()
-            require("cyberdream").setup({
-                transparent = true,
-                italic_comments = true,
-                hide_fillchars = false,
-                borderless_pickers = true,
-                terminal_colors = false,
-            })
+            -- require("cyberdream").setup({
+            --     transparent = true,
+            --     italic_comments = true,
+            --     hide_fillchars = false,
+            --     borderless_pickers = true,
+            --     terminal_colors = false,
+            -- })
         end,
     },
     {
@@ -222,7 +222,7 @@ return {
         lazy = false,
         priority = 1000,
         config = function()
-            vim.opt.background = "dark"
+            -- vim.opt.background = "dark"
             -- vim.cmd.colorscheme("oxocarbon")
         end,
     },
@@ -231,7 +231,7 @@ return {
         priority = 1000,
         lazy = false,
         config = function()
-            vim.cmd.colorscheme('naysayer')
+            -- vim.cmd.colorscheme('naysayer')
         end,
     }
 }
